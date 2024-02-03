@@ -20,4 +20,8 @@ public class CategoryResponse {
         this.displayOrder = category.getDisplayOrder();
         this.status = category.getStatus().name();
     }
+
+    public static CategoryResponse of(Category category) {
+        return new CategoryResponse(category);
+    }
 }

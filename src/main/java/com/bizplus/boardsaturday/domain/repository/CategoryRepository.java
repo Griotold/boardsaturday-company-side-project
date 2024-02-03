@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface CategoryRepository {
 
-    void create(Category category);
+    Long lastId();
+
+    Integer lastDisplayOrder();
+
+    Category create(Category category);
 
     List<Category> findAll();
 }
