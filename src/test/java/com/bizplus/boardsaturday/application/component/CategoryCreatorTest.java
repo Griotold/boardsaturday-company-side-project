@@ -36,7 +36,6 @@ class CategoryCreatorTest {
         // then
         assertThat(categoryResponse.getId()).isEqualTo(lastId + 1);
         assertThat(categoryResponse.getDisplayOrder()).isEqualTo(lastDisplayOrder + 1);
-
     }
 
 }
