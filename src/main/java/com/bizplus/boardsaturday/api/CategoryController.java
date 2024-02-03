@@ -1,6 +1,7 @@
 package com.bizplus.boardsaturday.api;
 
 import com.bizplus.boardsaturday.application.request.CreateCategoryRequest;
+import com.bizplus.boardsaturday.application.request.UpdateCategoryRequest;
 import com.bizplus.boardsaturday.application.response.CategoryResponse;
 import com.bizplus.boardsaturday.application.service.CategoryService;
 import com.bizplus.boardsaturday.global.response.ResponseDto;
@@ -38,5 +39,17 @@ public class CategoryController {
                 = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), categoryResponse);
 
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCategory(@RequestBody @Validated UpdateCategoryRequest request,
+                                            BindingResult bindingResult,
+                                            @PathVariable Long id) {
+        CategoryResponse categoryResponse = categoryService.update(request, id);
+
+        ResponseDto<CategoryResponse> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), categoryResponse);
+
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }
