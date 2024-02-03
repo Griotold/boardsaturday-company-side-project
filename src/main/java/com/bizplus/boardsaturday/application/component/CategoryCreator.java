@@ -23,7 +23,6 @@ public class CategoryCreator {
         Category categoryPS = categoryRepository.create(category);
 
         // 4. CategoryResponse로 변환해서 반환
-
-        return null;
+        return CategoryResponse.of(categoryPS);
     }
 }
