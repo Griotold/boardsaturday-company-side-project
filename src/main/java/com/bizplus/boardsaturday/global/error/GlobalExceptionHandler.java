@@ -12,7 +12,7 @@ import java.util.Map;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
+    // todo 질문 1.
     /**
      * javax.validation.valid 또는 @Validated binding error가 발생할 경우
      * ResponseEntity<?>를 쓰고 싶다.
