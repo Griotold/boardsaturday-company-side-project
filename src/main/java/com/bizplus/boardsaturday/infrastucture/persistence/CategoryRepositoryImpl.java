@@ -17,6 +17,13 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     private final JpaCategoryRepository categoryRepository;
     private final JPAQueryFactory query;
 
+    // todo 질문2. 테스트를 위한 메서드인데 실무에서 이런 경우가 많은지
+    public Long lastId() {
+        return query.select(category.id.max())
+                .from(category)
+                .fetchOne();
+    }
+
     @Override
     public Integer lastDisplayOrder() {
         return query

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface CategoryRepository {
 
+    Long lastId();
+
     Integer lastDisplayOrder();
 
     Category create(Category category);
