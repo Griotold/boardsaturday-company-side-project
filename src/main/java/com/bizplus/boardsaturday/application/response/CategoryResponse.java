@@ -5,14 +5,13 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Builder
 public class CategoryResponse {
 
-    private Long id;
-    private String name;
-    private String description;
-    private int displayOrder;
-    private String status;
+    private final Long id;
+    private final String name;
+    private final String description;
+    private final int displayOrder;
+    private final String status;
 
     public CategoryResponse(Category category) {
         this.id = category.getId();
