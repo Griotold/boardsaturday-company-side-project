@@ -32,6 +32,11 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<?> createCategory(@RequestBody @Validated CreateCategoryRequest request,
                                            BindingResult bindingResult) {
-        return new ResponseEntity<>("created", HttpStatus.CREATED);
+        CategoryResponse categoryResponse = categoryService.create(request);
+
+        ResponseDto<CategoryResponse> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), categoryResponse);
+
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 }
