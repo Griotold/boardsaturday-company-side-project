@@ -1,5 +1,6 @@
 package com.bizplus.boardsaturday.api;
 
+import com.bizplus.boardsaturday.application.request.CreateCategoryRequest;
 import com.bizplus.boardsaturday.application.response.CategoryResponse;
 import com.bizplus.boardsaturday.application.service.CategoryService;
 import com.bizplus.boardsaturday.global.response.ResponseDto;
@@ -7,9 +8,9 @@ import com.bizplus.boardsaturday.global.response.ResponseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +27,11 @@ public class CategoryController {
         ResponseDto<List<CategoryResponse>> responseDto
                 = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), all);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> createCategory(@RequestBody @Validated CreateCategoryRequest request,
+                                           BindingResult bindingResult) {
+        return new ResponseEntity<>("created", HttpStatus.CREATED);
     }
 }
