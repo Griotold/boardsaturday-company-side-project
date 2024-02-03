@@ -49,5 +49,10 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         return jpaCategoryRepository.findAll();
     }
 
+    @Override
+    public List<Category> findAllByDisplayOrder() {
+        return jpaCategoryRepository.findAllByOrderByDisplayOrderAsc();
+    }
+
 
 }

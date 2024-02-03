@@ -16,7 +16,7 @@ public class CategoryQuery {
     private final CategoryRepository categoryRepository;
 
     public List<CategoryResponse> findAll() {
-        List<Category> all = categoryRepository.findAll();
+        List<Category> all = categoryRepository.findAllByDisplayOrder();
         List<CategoryResponse> collect = all.stream()
                 .map(CategoryResponse::new).collect(Collectors.toList());
 

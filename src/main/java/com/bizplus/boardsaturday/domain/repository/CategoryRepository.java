@@ -16,4 +16,6 @@ public interface CategoryRepository {
     Category create(Category category);
 
     List<Category> findAll();
+
+    List<Category> findAllByDisplayOrder();
 }
