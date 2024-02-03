@@ -1,5 +1,7 @@
 package com.bizplus.boardsaturday.application.request;
 
+import com.bizplus.boardsaturday.domain.entity.Category;
+import com.bizplus.boardsaturday.domain.type.CategoryStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +24,9 @@ public class CreateCategoryRequest {
     public CreateCategoryRequest(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Category toEntity(int displayOrder) {
+        return new Category(name, description, displayOrder, CategoryStatus.ACTIVE);
     }
 }
