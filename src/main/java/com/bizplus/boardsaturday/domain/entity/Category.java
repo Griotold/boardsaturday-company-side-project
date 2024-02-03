@@ -1,5 +1,6 @@
 package com.bizplus.boardsaturday.domain.entity;
 
+import com.bizplus.boardsaturday.application.request.UpdateCategoryRequest;
 import com.bizplus.boardsaturday.domain.common.BaseTimeEntity;
 import com.bizplus.boardsaturday.domain.type.CategoryStatus;
 import lombok.AccessLevel;
@@ -37,5 +38,11 @@ public class Category extends BaseTimeEntity {
         this.description = description;
         this.displayOrder = displayOrder;
         this.status = status;
+    }
+
+    public void update(UpdateCategoryRequest request) {
+        // todo 쿼리 스트링 id와 requestBody의 id가 일치한 지 검증하는 로직
+        name = request.getName();
+        description = request.getDescription();
     }
 }
