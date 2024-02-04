@@ -63,6 +63,16 @@ public class CategoryController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    @PutMapping("/{id}/off")
+    public ResponseEntity<?> changeStatusOff(@PathVariable Long id) {
+        CategoryResponse categoryResponse = categoryService.changeStatusOff(id);
+
+        ResponseDto<CategoryResponse> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), categoryResponse);
+
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> findOneCategory(@PathVariable Long id) {
         CategoryDetailResponse categoryDetailResponse = categoryService.findOne(id);
