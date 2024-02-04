@@ -9,6 +9,8 @@ public interface CategoryRepository {
 
     Optional<Category> findById(Long id);
 
+    void delete(Category category);
+
     Integer lastDisplayOrder();
 
     Category create(Category category);
