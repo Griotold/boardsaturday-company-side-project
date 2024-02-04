@@ -80,4 +80,14 @@ public class CategoryController {
                 = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), categoryDetailResponse);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        categoryService.delete(id);
+
+        ResponseDto<Object> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), null);
+
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
 }

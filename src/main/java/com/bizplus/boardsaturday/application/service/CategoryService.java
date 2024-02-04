@@ -1,6 +1,7 @@
 package com.bizplus.boardsaturday.application.service;
 
 import com.bizplus.boardsaturday.application.component.CategoryCreator;
+import com.bizplus.boardsaturday.application.component.CategoryDeleter;
 import com.bizplus.boardsaturday.application.component.CategoryQuery;
 import com.bizplus.boardsaturday.application.component.CategoryUpdater;
 import com.bizplus.boardsaturday.application.request.CreateCategoryRequest;
@@ -22,6 +23,7 @@ public class CategoryService {
     private final CategoryQuery categoryQuery;
     private final CategoryCreator categoryCreator;
     private final CategoryUpdater categoryUpdater;
+    private final CategoryDeleter categoryDeleter;
 
     public List<CategoryResponse> findAll() {
         return categoryQuery.findAll();
@@ -45,6 +47,10 @@ public class CategoryService {
 
     public CategoryResponse changeStatusOff(Long id) {
         return categoryUpdater.changeStatusOff(id);
+    }
+
+    public void delete(Long id) {
+        categoryDeleter.delete(id);
     }
 
 }

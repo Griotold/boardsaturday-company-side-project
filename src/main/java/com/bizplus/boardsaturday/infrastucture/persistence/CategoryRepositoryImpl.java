@@ -24,6 +24,11 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
+    public void delete(Category category) {
+        jpaCategoryRepository.delete(category);
+    }
+
+    @Override
     public Integer lastDisplayOrder() {
         return query
                 .select(category.displayOrder.max().coalesce(1))
