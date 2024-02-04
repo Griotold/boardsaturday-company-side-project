@@ -45,4 +45,12 @@ public class Category extends BaseTimeEntity {
         name = request.getName();
         description = request.getDescription();
     }
+
+    public void changeStatusOn() {
+        this.status = CategoryStatus.ACTIVE;
+    }
+
+    public void changeStatusOff() {
+        this.status = CategoryStatus.INACTIVE;
+    }
 }
