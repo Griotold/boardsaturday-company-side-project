@@ -49,4 +49,8 @@ public class Category extends BaseTimeEntity {
     public void changeStatusOn() {
         this.status = CategoryStatus.ACTIVE;
     }
+
+    public void changeStatusOff() {
+        this.status = CategoryStatus.INACTIVE;
+    }
 }
