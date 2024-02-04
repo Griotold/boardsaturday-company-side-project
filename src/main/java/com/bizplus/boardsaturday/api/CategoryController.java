@@ -2,6 +2,7 @@ package com.bizplus.boardsaturday.api;
 
 import com.bizplus.boardsaturday.application.request.CreateCategoryRequest;
 import com.bizplus.boardsaturday.application.request.UpdateCategoryRequest;
+import com.bizplus.boardsaturday.application.response.CategoryDetailResponse;
 import com.bizplus.boardsaturday.application.response.CategoryResponse;
 import com.bizplus.boardsaturday.application.service.CategoryService;
 import com.bizplus.boardsaturday.global.response.ResponseDto;
@@ -49,6 +50,14 @@ public class CategoryController {
         ResponseDto<CategoryResponse> responseDto
                 = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), categoryResponse);
 
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findOneCategory(@PathVariable Long id) {
+        CategoryDetailResponse categoryDetailResponse = categoryService.findOne(id);
+        ResponseDto<CategoryDetailResponse> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), categoryDetailResponse);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }

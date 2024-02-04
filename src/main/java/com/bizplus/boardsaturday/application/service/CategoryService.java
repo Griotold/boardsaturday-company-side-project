@@ -5,6 +5,7 @@ import com.bizplus.boardsaturday.application.component.CategoryQuery;
 import com.bizplus.boardsaturday.application.component.CategoryUpdater;
 import com.bizplus.boardsaturday.application.request.CreateCategoryRequest;
 import com.bizplus.boardsaturday.application.request.UpdateCategoryRequest;
+import com.bizplus.boardsaturday.application.response.CategoryDetailResponse;
 import com.bizplus.boardsaturday.application.response.CategoryResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,10 @@ public class CategoryService {
 
     public CategoryResponse update(UpdateCategoryRequest request, Long id) {
         return categoryUpdater.update(request, id);
+    }
+
+    public CategoryDetailResponse findOne(Long id) {
+        return categoryQuery.findOne(id);
     }
 
 }
