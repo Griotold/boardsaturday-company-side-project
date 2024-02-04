@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class CategoryResponse {
-
+    // todo 게시글 개발 완료되면 게시글 개수 추가!
     private final Long id;
     private final String name;
     private final String description;
