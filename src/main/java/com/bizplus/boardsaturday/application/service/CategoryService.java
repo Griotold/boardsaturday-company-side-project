@@ -43,4 +43,8 @@ public class CategoryService {
         return categoryUpdater.changeStatusOn(id);
     }
 
+    public CategoryResponse changeStatusOff(Long id) {
+        return categoryUpdater.changeStatusOff(id);
+    }
+
 }
