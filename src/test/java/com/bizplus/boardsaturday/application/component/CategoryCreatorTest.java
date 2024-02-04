@@ -19,7 +19,6 @@ class CategoryCreatorTest {
     @Autowired
     CategoryRepository categoryRepository;
 
-    // todo 질문2
     @Test
     void CategoryCreatorTest_create() throws Exception {
         // given
@@ -27,14 +26,13 @@ class CategoryCreatorTest {
         String description = "blah blah";
         CreateCategoryRequest request = new CreateCategoryRequest(name, description);
         Integer lastDisplayOrder = categoryRepository.lastDisplayOrder();
-        Long lastId = categoryRepository.lastId();
 
 
         // when
         CategoryResponse categoryResponse = categoryCreator.create(request);
 
         // then
-        assertThat(categoryResponse.getId()).isEqualTo(lastId + 1);
+        assertThat(categoryResponse.getId()).isEqualTo(11);
         assertThat(categoryResponse.getDisplayOrder()).isEqualTo(lastDisplayOrder + 1);
     }
 

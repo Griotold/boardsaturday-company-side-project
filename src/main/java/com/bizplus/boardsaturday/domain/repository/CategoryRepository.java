@@ -9,8 +9,6 @@ public interface CategoryRepository {
 
     Optional<Category> findById(Long id);
 
-    Long lastId();
-
     Integer lastDisplayOrder();
 
     Category create(Category category);

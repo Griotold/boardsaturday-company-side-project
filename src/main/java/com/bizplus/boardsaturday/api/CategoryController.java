@@ -21,7 +21,6 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    // todo 질문 1. ResponseEntity<?>
     @GetMapping
     public ResponseEntity<?> findAll() {
         List<CategoryResponse> all = categoryService.findAll();

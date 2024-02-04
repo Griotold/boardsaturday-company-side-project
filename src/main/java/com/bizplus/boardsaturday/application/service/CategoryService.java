@@ -16,7 +16,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-//@Transactional(readOnly = true) // todo 질문3. 서비스에 붙이면 안되는 이유
 public class CategoryService {
 
     private final CategoryQuery categoryQuery;

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Configuration
 public class DummyDevInit {
 
+    // 테스트 환경이랑 비즈니스 환경을 분리해라
     @Transactional
     @Bean
     CommandLineRunner init(CategoryRepository categoryRepository) {
