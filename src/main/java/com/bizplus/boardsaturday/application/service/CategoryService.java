@@ -39,4 +39,8 @@ public class CategoryService {
         return categoryQuery.findOne(id);
     }
 
+    public CategoryResponse changeStatusOn(Long id) {
+        return categoryUpdater.changeStatusOn(id);
+    }
+
 }
