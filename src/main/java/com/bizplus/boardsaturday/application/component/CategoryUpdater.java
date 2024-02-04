@@ -34,4 +34,13 @@ public class CategoryUpdater {
 
         return CategoryResponse.of(category);
     }
+
+    public CategoryResponse changeStatusOff(Long id) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("카테고리를 찾을 수 없습니다."));
+
+        category.changeStatusOff();
+
+        return CategoryResponse.of(category);
+    }
 }
