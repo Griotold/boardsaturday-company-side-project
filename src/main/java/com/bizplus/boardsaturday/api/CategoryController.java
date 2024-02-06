@@ -96,11 +96,11 @@ public class CategoryController {
     @PutMapping("/order-change")
     public ResponseEntity<?> orderChange(@RequestBody @Validated OrderChangeCategoryRequest request,
                                          BindingResult bindingResult) {
-        List<Integer> orders = request.getOrdersAsIntegers();
+        categoryService.updateDisplayOrder(request.getIds());
 
-        for (Integer order : orders) {
-            log.info("order = {}", order);
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        ResponseDto<Object> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), null);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }

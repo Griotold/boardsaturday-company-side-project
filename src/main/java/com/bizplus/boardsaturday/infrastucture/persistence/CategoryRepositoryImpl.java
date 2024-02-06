@@ -48,9 +48,24 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
+    public Long count() {
+        return jpaCategoryRepository.count();
+    }
+
+    @Override
     public List<Category> findAllByDisplayOrder() {
         return jpaCategoryRepository.findAllByOrderByDisplayOrderAsc();
     }
+
+    @Override
+    public Long countForUpdateDisplayOrder(List<Long> ids) {
+        return query
+                .select(category.count())
+                .from(category)
+                .where(category.id.in(ids))
+                .fetchOne();
+    }
+
 
 
 }
