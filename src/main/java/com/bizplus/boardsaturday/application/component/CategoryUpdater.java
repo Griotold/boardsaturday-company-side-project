@@ -47,6 +47,12 @@ public class CategoryUpdater {
     }
 
     public void updateDisplayOrder(List<Long> ids) {
+        Long count = categoryRepository.count();
+        Long countIds = categoryRepository.countForUpdateDisplayOrder(ids);
+
+        if (count.longValue() != countIds.longValue()) {
+            throw new RuntimeException("입력이 잘못 되었습니다.");
+        }
 
         AtomicInteger atomicInteger = new AtomicInteger(1);
 

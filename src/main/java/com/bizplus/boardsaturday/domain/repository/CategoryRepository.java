@@ -19,4 +19,7 @@ public interface CategoryRepository {
 
     List<Category> findAllByDisplayOrder();
 
+    Long count();
+
+    Long countForUpdateDisplayOrder(List<Long> ids);
 }
