@@ -24,4 +24,8 @@ public class GlobalExceptionHandler {
                 .body(errorResponse);
     }
 
+    /**
+     * todo BusinessException을 만들고 그걸 받을 핸들러를 설계하자
+     * */
+
 }
