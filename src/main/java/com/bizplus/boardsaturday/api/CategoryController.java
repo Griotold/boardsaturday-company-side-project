@@ -1,6 +1,7 @@
 package com.bizplus.boardsaturday.api;
 
 import com.bizplus.boardsaturday.application.request.CreateCategoryRequest;
+import com.bizplus.boardsaturday.application.request.OrderChangeCategoryRequest;
 import com.bizplus.boardsaturday.application.request.UpdateCategoryRequest;
 import com.bizplus.boardsaturday.application.response.CategoryDetailResponse;
 import com.bizplus.boardsaturday.application.response.CategoryResponse;
@@ -8,6 +9,7 @@ import com.bizplus.boardsaturday.application.service.CategoryService;
 import com.bizplus.boardsaturday.global.response.ResponseDto;
 import com.bizplus.boardsaturday.global.response.ResponseStatus;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -15,7 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
@@ -89,5 +91,16 @@ public class CategoryController {
                 = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), null);
 
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
+    @PutMapping("/order-change")
+    public ResponseEntity<?> orderChange(@RequestBody @Validated OrderChangeCategoryRequest request,
+                                         BindingResult bindingResult) {
+        List<Integer> orders = request.getOrdersAsIntegers();
+
+        for (Integer order : orders) {
+            log.info("order = {}", order);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
