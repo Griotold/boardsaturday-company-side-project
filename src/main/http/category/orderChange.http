@@ -2,5 +2,5 @@ PUT http://localhost:8080/api/categories/order-change
 Content-Type: application/json
 
 {
-  "orders": [1, 3, 2, 4, 6, 5]
+  "ids": [1, 3, 2, 4, 6, 5, 7, 8, 9, 10]
 }

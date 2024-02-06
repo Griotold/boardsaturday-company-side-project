@@ -53,4 +53,8 @@ public class CategoryService {
         categoryDeleter.delete(id);
     }
 
+    public void updateDisplayOrder(List<Long> ids) {
+        categoryUpdater.updateDisplayOrder(ids);
+    }
+
 }

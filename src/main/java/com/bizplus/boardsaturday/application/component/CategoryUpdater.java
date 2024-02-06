@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 @RequiredArgsConstructor
@@ -42,5 +44,17 @@ public class CategoryUpdater {
         category.changeStatusOff();
 
         return CategoryResponse.of(category);
+    }
+
+    public void updateDisplayOrder(List<Long> ids) {
+
+        AtomicInteger atomicInteger = new AtomicInteger(1);
+
+        for (Long id : ids) {
+            Category category = categoryRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("카테고리를 찾을 수 없습니다."));
+
+            category.updateDisplayOrder(atomicInteger.getAndIncrement());
+        }
     }
 }
