@@ -1,6 +1,6 @@
 package com.bizplus.boardsaturday.domain.entity;
 
-import com.bizplus.boardsaturday.application.request.UpdateCategoryRequest;
+import com.bizplus.boardsaturday.application.request.category.UpdateCategoryRequest;
 import com.bizplus.boardsaturday.domain.common.BaseTimeEntity;
 import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import lombok.AccessLevel;

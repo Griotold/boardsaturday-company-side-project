@@ -1,13 +1,12 @@
 package com.bizplus.boardsaturday.application.response;
 
+import com.bizplus.boardsaturday.application.response.category.CategoryResponse;
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.type.ActiveStatus;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CategoryResponseTest {
 

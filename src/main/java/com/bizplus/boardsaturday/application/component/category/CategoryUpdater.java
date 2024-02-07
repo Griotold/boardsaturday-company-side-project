@@ -1,7 +1,7 @@
-package com.bizplus.boardsaturday.application.component;
+package com.bizplus.boardsaturday.application.component.category;
 
-import com.bizplus.boardsaturday.application.request.UpdateCategoryRequest;
-import com.bizplus.boardsaturday.application.response.CategoryResponse;
+import com.bizplus.boardsaturday.application.request.category.UpdateCategoryRequest;
+import com.bizplus.boardsaturday.application.response.category.CategoryResponse;
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;

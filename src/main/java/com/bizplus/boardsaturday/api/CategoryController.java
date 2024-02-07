@@ -1,10 +1,10 @@
 package com.bizplus.boardsaturday.api;
 
-import com.bizplus.boardsaturday.application.request.CreateCategoryRequest;
-import com.bizplus.boardsaturday.application.request.OrderChangeCategoryRequest;
-import com.bizplus.boardsaturday.application.request.UpdateCategoryRequest;
-import com.bizplus.boardsaturday.application.response.CategoryDetailResponse;
-import com.bizplus.boardsaturday.application.response.CategoryResponse;
+import com.bizplus.boardsaturday.application.request.category.CreateCategoryRequest;
+import com.bizplus.boardsaturday.application.request.category.OrderChangeCategoryRequest;
+import com.bizplus.boardsaturday.application.request.category.UpdateCategoryRequest;
+import com.bizplus.boardsaturday.application.response.category.CategoryDetailResponse;
+import com.bizplus.boardsaturday.application.response.category.CategoryResponse;
 import com.bizplus.boardsaturday.application.service.CategoryService;
 import com.bizplus.boardsaturday.global.response.ResponseDto;
 import com.bizplus.boardsaturday.global.response.ResponseStatus;

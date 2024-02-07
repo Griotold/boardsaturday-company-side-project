@@ -1,4 +1,4 @@
-package com.bizplus.boardsaturday.application.component;
+package com.bizplus.boardsaturday.application.component.category;
 
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.repository.CategoryRepository;

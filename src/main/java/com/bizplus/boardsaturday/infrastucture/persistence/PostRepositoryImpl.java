@@ -36,7 +36,7 @@ public class PostRepositoryImpl implements PostRepository {
     public List<PostWithCategoryDto> findAllOrderByCreatedAt() {
         return query.select(selectPostWithCategory())
                 .from(post)
-                .innerJoin(category)
+                .innerJoin(post.category, category)
                 .fetch();
     }
 
