@@ -1,7 +1,7 @@
 package com.bizplus.boardsaturday.application.request;
 
 import com.bizplus.boardsaturday.domain.entity.Category;
-import com.bizplus.boardsaturday.domain.type.CategoryStatus;
+import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class CreateCategoryRequestTest {
 
         // then
         assertThat(category.getDisplayOrder()).isEqualTo(51);
-        assertThat(category.getStatus()).isEqualTo(CategoryStatus.ACTIVE);
+        assertThat(category.getStatus()).isEqualTo(ActiveStatus.ACTIVE);
 
     }
 

@@ -1,7 +1,7 @@
 package com.bizplus.boardsaturday.application.request;
 
 import com.bizplus.boardsaturday.domain.entity.Category;
-import com.bizplus.boardsaturday.domain.type.CategoryStatus;
+import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +27,6 @@ public class CreateCategoryRequest {
     }
 
     public Category toEntity(int displayOrder) {
-        return new Category(name, description, displayOrder, CategoryStatus.ACTIVE);
+        return new Category(name, description, displayOrder, ActiveStatus.ACTIVE);
     }
 }

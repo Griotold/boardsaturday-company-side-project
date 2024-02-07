@@ -1,7 +1,7 @@
 package com.bizplus.boardsaturday.application.response;
 
 import com.bizplus.boardsaturday.domain.entity.Category;
-import com.bizplus.boardsaturday.domain.type.CategoryStatus;
+import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ class CategoryResponseTest {
         String name = "test_category";
         String description = "blah blah";
         int lastDisplayOrder = 50;
-        Category category = new Category(name, description, lastDisplayOrder, CategoryStatus.ACTIVE);
+        Category category = new Category(name, description, lastDisplayOrder, ActiveStatus.ACTIVE);
 
         // when
         CategoryResponse categoryResponse = CategoryResponse.of(category);
