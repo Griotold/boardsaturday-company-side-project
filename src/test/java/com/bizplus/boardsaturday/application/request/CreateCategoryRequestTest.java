@@ -1,13 +1,13 @@
 package com.bizplus.boardsaturday.application.request;
 
+import com.bizplus.boardsaturday.application.request.category.CreateCategoryRequest;
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+
 @Slf4j
 class CreateCategoryRequestTest {
 

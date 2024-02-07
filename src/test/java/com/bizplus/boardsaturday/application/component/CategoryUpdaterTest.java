@@ -1,7 +1,8 @@
 package com.bizplus.boardsaturday.application.component;
 
-import com.bizplus.boardsaturday.application.request.UpdateCategoryRequest;
-import com.bizplus.boardsaturday.application.response.CategoryResponse;
+import com.bizplus.boardsaturday.application.component.category.CategoryUpdater;
+import com.bizplus.boardsaturday.application.request.category.UpdateCategoryRequest;
+import com.bizplus.boardsaturday.application.response.category.CategoryResponse;
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.repository.CategoryRepository;
 import org.assertj.core.api.Assertions;
@@ -12,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 class CategoryUpdaterTest {
 
-    @Autowired CategoryUpdater categoryUpdater;
+    @Autowired
+    CategoryUpdater categoryUpdater;
 
     @Autowired
     CategoryRepository categoryRepository;

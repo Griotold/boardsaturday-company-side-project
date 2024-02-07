@@ -1,15 +1,15 @@
 package com.bizplus.boardsaturday.application.component;
 
-import com.bizplus.boardsaturday.application.request.CreateCategoryRequest;
-import com.bizplus.boardsaturday.application.response.CategoryResponse;
+import com.bizplus.boardsaturday.application.component.category.CategoryCreator;
+import com.bizplus.boardsaturday.application.request.category.CreateCategoryRequest;
+import com.bizplus.boardsaturday.application.response.category.CategoryResponse;
 import com.bizplus.boardsaturday.domain.repository.CategoryRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class CategoryCreatorTest {
 

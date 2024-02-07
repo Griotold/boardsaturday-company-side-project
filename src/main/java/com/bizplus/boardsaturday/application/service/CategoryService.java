@@ -1,17 +1,16 @@
 package com.bizplus.boardsaturday.application.service;
 
-import com.bizplus.boardsaturday.application.component.CategoryCreator;
-import com.bizplus.boardsaturday.application.component.CategoryDeleter;
-import com.bizplus.boardsaturday.application.component.CategoryQuery;
-import com.bizplus.boardsaturday.application.component.CategoryUpdater;
-import com.bizplus.boardsaturday.application.request.CreateCategoryRequest;
-import com.bizplus.boardsaturday.application.request.UpdateCategoryRequest;
-import com.bizplus.boardsaturday.application.response.CategoryDetailResponse;
-import com.bizplus.boardsaturday.application.response.CategoryResponse;
+import com.bizplus.boardsaturday.application.component.category.CategoryCreator;
+import com.bizplus.boardsaturday.application.component.category.CategoryDeleter;
+import com.bizplus.boardsaturday.application.component.category.CategoryQuery;
+import com.bizplus.boardsaturday.application.component.category.CategoryUpdater;
+import com.bizplus.boardsaturday.application.request.category.CreateCategoryRequest;
+import com.bizplus.boardsaturday.application.request.category.UpdateCategoryRequest;
+import com.bizplus.boardsaturday.application.response.category.CategoryDetailResponse;
+import com.bizplus.boardsaturday.application.response.category.CategoryResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

@@ -1,5 +1,7 @@
-package com.bizplus.boardsaturday.application.request;
+package com.bizplus.boardsaturday.application.request.category;
 
+import com.bizplus.boardsaturday.domain.entity.Category;
+import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UpdateCategoryRequest {
+public class CreateCategoryRequest {
 
     @NotBlank(message = "이름은 필수 입력값입니다.")
     @Size(max = 100, message = "100자 이내로 적어주세요.")
@@ -19,8 +21,12 @@ public class UpdateCategoryRequest {
     @Size(max = 255, message = "255자 이내로 적어주세요.")
     private String description;
 
-    public UpdateCategoryRequest(String name, String description) {
+    public CreateCategoryRequest(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Category toEntity(int displayOrder) {
+        return new Category(name, description, displayOrder, ActiveStatus.ACTIVE);
     }
 }

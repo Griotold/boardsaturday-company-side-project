@@ -1,4 +1,4 @@
-package com.bizplus.boardsaturday.application.response;
+package com.bizplus.boardsaturday.application.response.category;
 
 import com.bizplus.boardsaturday.domain.entity.Category;
 import lombok.Getter;
