@@ -1,5 +1,6 @@
 package com.bizplus.boardsaturday.domain.repository;
 
+import com.bizplus.boardsaturday.domain.dto.PostWithCategoryDto;
 import com.bizplus.boardsaturday.domain.entity.Post;
 
 import java.util.List;
@@ -10,5 +11,5 @@ public interface PostRepository {
 
     List<Post> findAll();
 
-    List<Post> findAllOrderByCreatedAt();
+    List<PostWithCategoryDto> findAllOrderByCreatedAt();
 }
