@@ -10,5 +10,5 @@ public interface PostRepository {
 
     List<Post> findAll();
 
-    List<Post> findAllSortByCreatedAt();
+    List<Post> findAllOrderByCreatedAt();
 }
