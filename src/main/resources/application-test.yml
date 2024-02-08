@@ -23,5 +23,5 @@ spring:
 
 logging:
   level:
-    com.com.bizplus.boardsaturday]': DEBUG
+    com.com.bizplus.boardsaturday: DEBUG
     org.hibernate.type: TRACE
