@@ -23,13 +23,8 @@ public class Tag extends BaseTimeEntity {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private Post post;
-
-    public Tag(String name, Post post) {
+    public Tag(String name) {
         this.name = name;
-        this.post = post;
     }
 
 }
