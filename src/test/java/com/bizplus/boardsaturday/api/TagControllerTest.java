@@ -61,4 +61,24 @@ class TagControllerTest {
         // then
         resultActions.andExpect(status().isCreated());
     }
+
+    @Test
+    void createTag_fail() throws Exception {
+        // given
+        String name = "";
+        CreateTagRequest request = new CreateTagRequest(name);
+        String requestBody = om.writeValueAsString(request);
+        log.info("test : requestBody = {}", requestBody);
+
+        // when
+        ResultActions resultActions = mvc.perform(post("/api/tags")
+                .content(requestBody)
+                .contentType(MediaType.APPLICATION_JSON));
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        log.info("test : responseBody = {}", responseBody);
+
+        // then
+        resultActions.andExpect(status().isBadRequest());
+        resultActions.andExpect(jsonPath("$.data.name").value("must not be blank"));
+    }
 }
