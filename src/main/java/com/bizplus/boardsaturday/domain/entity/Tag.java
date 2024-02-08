@@ -23,7 +23,7 @@ public class Tag extends BaseTimeEntity {
 
     private String name;
 
-    public Tag(String name, Post post) {
+    public Tag(String name) {
         this.name = name;
     }
 
