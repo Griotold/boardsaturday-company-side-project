@@ -13,4 +13,8 @@ public class TagResponse {
         this.id = tag.getId();
         this.name = tag.getName();
     }
+
+    public static TagResponse of(Tag tag) {
+        return new TagResponse(tag);
+    }
 }
