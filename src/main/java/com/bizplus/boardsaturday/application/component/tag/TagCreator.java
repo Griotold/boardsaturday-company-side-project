@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 @Transactional
@@ -15,10 +17,18 @@ public class TagCreator {
     private final TagRepository tagRepository;
 
     public TagResponse create(CreateTagRequest request) {
-        Tag tag = request.toEntity();
 
-        Tag tagPS = tagRepository.create(tag);
+        Optional<Tag> findByNameTag = tagRepository.findByName(request.getName());
 
-        return TagResponse.of(tagPS);
+        Tag tag;
+
+        if (findByNameTag.isPresent()) {
+            tag = findByNameTag.get();
+        } else {
+            tag = request.toEntity();
+            tag = tagRepository.create(tag);
+        }
+
+        return TagResponse.of(tag);
     }
 }

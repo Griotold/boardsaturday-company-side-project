@@ -21,6 +21,7 @@ public class Tag extends BaseTimeEntity {
     @Column(name = "tag_id")
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String name;
 
     public Tag(String name) {
