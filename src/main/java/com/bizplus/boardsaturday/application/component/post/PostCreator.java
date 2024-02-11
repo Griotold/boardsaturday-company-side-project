@@ -25,7 +25,7 @@ public class PostCreator {
     private final PostTagRepository postTagRepository;
 
 
-    public void create(CreatePostRequest request) {
+    public Post create(CreatePostRequest request) {
         Category category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(() -> new EntityNotFoundException("카테고리를 찾을 수 없습니다."));
 
@@ -42,6 +42,6 @@ public class PostCreator {
 
             postTagRepository.create(postTag);
         }
-
+        return postPS;
     }
 }

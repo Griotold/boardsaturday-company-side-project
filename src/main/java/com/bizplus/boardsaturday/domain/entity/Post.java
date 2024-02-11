@@ -10,6 +10,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -40,15 +41,14 @@ public class Post extends BaseTimeEntity {
     private DeleteStatus deleteStatus;
 
     @OneToMany(mappedBy = "post")
-    private List<PostTag> postTags;
+    private List<PostTag> postTags = new ArrayList<>();
 
-    public Post(String title, String body, Category category, ActiveStatus activeStatus, DeleteStatus deleteStatus, List<PostTag> postTags) {
+    public Post(String title, String body, Category category, ActiveStatus activeStatus, DeleteStatus deleteStatus) {
         this.title = title;
         this.body = body;
         this.category = category;
         this.activeStatus = activeStatus;
         this.deleteStatus = deleteStatus;
-        this.postTags = postTags;
     }
 
 
