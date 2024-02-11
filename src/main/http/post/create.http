@@ -4,5 +4,6 @@ Content-Type: application/json
 {
   "categoryId" : 1,
   "title" : "title test",
-  "body" : "body test"
+  "body" : "body test",
+  "tagIds": [1, 3, 5]
 }

@@ -24,4 +24,9 @@ public class TagRepositoryImpl implements TagRepository {
     public Optional<Tag> findByName(String name) {
         return jpaTagRepository.findByName(name);
     }
+
+    @Override
+    public Optional<Tag> findById(Long id) {
+        return jpaTagRepository.findById(id);
+    }
 }

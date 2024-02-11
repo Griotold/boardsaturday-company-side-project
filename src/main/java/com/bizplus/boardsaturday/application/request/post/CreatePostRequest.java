@@ -28,16 +28,16 @@ public class CreatePostRequest {
     @NotEmpty
     private String body;
 
-    private List<String> tags;
+    private List<Long> tagIds;
 
     public CreatePostRequest(Long categoryId,
                              String title,
                              String body,
-                             List<String> tags) {
+                             List<Long> tagIds) {
         this.categoryId = categoryId;
         this.title = title;
         this.body = body;
-        this.tags = tags;
+        this.tagIds = tagIds;
     }
 
     public Post toEntity(Category category) {
