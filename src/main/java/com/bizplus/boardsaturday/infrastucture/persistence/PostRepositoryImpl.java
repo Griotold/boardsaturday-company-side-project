@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.bizplus.boardsaturday.domain.entity.QPost.post;
 import static com.bizplus.boardsaturday.domain.entity.QCategory.category;
@@ -38,6 +39,11 @@ public class PostRepositoryImpl implements PostRepository {
                 .from(post)
                 .innerJoin(post.category, category)
                 .fetch();
+    }
+
+    @Override
+    public Optional<Post> findById(Long id) {
+        return jpaPostRepository.findById(id);
     }
 
     private ConstructorExpression<PostWithCategoryDto> selectPostWithCategory() {

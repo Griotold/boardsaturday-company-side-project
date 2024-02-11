@@ -55,4 +55,12 @@ public class Post extends BaseTimeEntity {
     public void addPostTag(PostTag postTag) {
         postTags.add(postTag);
     }
+
+    public void changeStatusOn() {
+        this.activeStatus = ActiveStatus.ACTIVE;
+    }
+
+    public void changeStatusOff() {
+        this.activeStatus = ActiveStatus.INACTIVE;
+    }
 }

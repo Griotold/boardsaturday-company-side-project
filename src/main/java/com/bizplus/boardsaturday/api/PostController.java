@@ -36,4 +36,25 @@ public class PostController {
                 = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), null);
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
+
+    @PutMapping("/{id}/on")
+    public ResponseEntity<?> changeStatusOn(@PathVariable Long id) {
+        postService.changeStatusOn(id);
+
+        ResponseDto<Object> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), null);
+
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/off")
+    public ResponseEntity<?> changeStatusOff(@PathVariable Long id) {
+        postService.changeStatusOff(id);
+
+        ResponseDto<Object> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), null);
+
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
 }
