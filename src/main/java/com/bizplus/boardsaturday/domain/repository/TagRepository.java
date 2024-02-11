@@ -9,4 +9,6 @@ public interface TagRepository {
     Tag create(Tag tag);
 
     Optional<Tag> findByName(String name);
+
+    Optional<Tag> findById(Long id);
 }

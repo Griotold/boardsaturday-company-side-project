@@ -33,4 +33,5 @@ public class PostTag extends BaseTimeEntity {
         this.post = post;
         this.tag = tag;
     }
+
 }
