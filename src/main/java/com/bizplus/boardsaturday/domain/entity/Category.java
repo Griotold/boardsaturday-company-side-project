@@ -42,7 +42,6 @@ public class Category extends BaseTimeEntity {
     }
 
     public void update(UpdateCategoryRequest request) {
-        // todo 쿼리 스트링 id와 requestBody의 id가 일치한 지 검증하는 로직
         name = request.getName();
         description = request.getDescription();
     }
