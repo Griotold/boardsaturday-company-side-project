@@ -1,5 +1,6 @@
 package com.bizplus.boardsaturday.global.error;
 
+import com.bizplus.boardsaturday.global.error.ex.BusinessException;
 import com.bizplus.boardsaturday.global.error.ex.CustomValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,27 @@ public class GlobalExceptionHandler {
         ErrorResponse<Object> errorResponse
                 = new ErrorResponse<>(ErrorCode.NOT_SUPPORTED_METHOD.getErrorCode(), ErrorCode.NOT_SUPPORTED_METHOD.getMessage(), null);
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(errorResponse);
+    }
+
+    /**
+     * 비즈니스 로직 실행 중 오류 발생
+     */
+    @ExceptionHandler(value = { BusinessException.class })
+    protected ResponseEntity<ErrorResponse<?>> handleConflict(BusinessException e) {
+        log.error("BusinessException", e);
+        ErrorResponse<Object> errorResponse = new ErrorResponse<>(e.getErrorCode().getErrorCode(), e.getErrorCode().getMessage(), null);
+        return ResponseEntity.status(e.getErrorCode().getHttpStatus())
+                .body(errorResponse);
+    }
+    /**
+     * 나머지 예외 발생
+     */
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<ErrorResponse<?>> handleException(Exception e) {
+        log.error("Exception", e);
+        ErrorResponse<Object> errorResponse = new ErrorResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                e.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
 }
