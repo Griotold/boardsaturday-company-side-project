@@ -39,6 +39,7 @@ public class PostCreator {
                     .orElseThrow(() -> new EntityNotFoundException("태그를 찾을 수 없습니다."));
 
             PostTag postTag = new PostTag(postPS, tag);
+            postPS.addPostTag(postTag);
 
             postTagRepository.create(postTag);
         }

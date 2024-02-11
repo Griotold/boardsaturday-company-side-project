@@ -51,5 +51,8 @@ public class Post extends BaseTimeEntity {
         this.deleteStatus = deleteStatus;
     }
 
-
+    // 연관관계 편의 메서드
+    public void addPostTag(PostTag postTag) {
+        postTags.add(postTag);
+    }
 }

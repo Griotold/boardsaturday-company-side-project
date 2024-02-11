@@ -32,9 +32,6 @@ public class PostTag extends BaseTimeEntity {
     public PostTag(Post post, Tag tag) {
         this.post = post;
         this.tag = tag;
-
-        // 연관관계 편의 메소드
-        post.getPostTags().add(this);
     }
 
 }
