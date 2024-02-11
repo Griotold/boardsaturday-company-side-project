@@ -63,4 +63,8 @@ public class Post extends BaseTimeEntity {
     public void changeStatusOff() {
         this.activeStatus = ActiveStatus.INACTIVE;
     }
+
+    public void delete() {
+        this.deleteStatus = DeleteStatus.DELETED;
+    }
 }
