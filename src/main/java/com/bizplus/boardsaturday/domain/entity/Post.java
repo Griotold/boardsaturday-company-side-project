@@ -10,6 +10,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @DynamicInsert
@@ -38,12 +39,16 @@ public class Post extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private DeleteStatus deleteStatus;
 
-    public Post(String title, String body, Category category, ActiveStatus activeStatus, DeleteStatus deleteStatus) {
+    @OneToMany(mappedBy = "post")
+    private List<PostTag> postTags;
+
+    public Post(String title, String body, Category category, ActiveStatus activeStatus, DeleteStatus deleteStatus, List<PostTag> postTags) {
         this.title = title;
         this.body = body;
         this.category = category;
         this.activeStatus = activeStatus;
         this.deleteStatus = deleteStatus;
+        this.postTags = postTags;
     }
 
 

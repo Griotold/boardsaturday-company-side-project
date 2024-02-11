@@ -35,7 +35,7 @@ class PostQueryTest {
 
         for (int i = 0; i < 10; i++) {
 
-            Post post = new Post("title" + i, "body" + i, category, ActiveStatus.ACTIVE, DeleteStatus.EXISTING);
+            Post post = new Post("title" + i, "body" + i, category, ActiveStatus.ACTIVE, DeleteStatus.EXISTING, null);
             postRepository.create(post);
         }
     }
