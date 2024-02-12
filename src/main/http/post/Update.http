@@ -1,0 +1,9 @@
+PUT localhost:8080/api/posts/12
+Content-Type: application/json
+
+{
+  "categoryId": 2,
+  "title" : "update title test",
+  "body" : "update body test",
+  "tagIds" : [2, 4, 6]
+}
