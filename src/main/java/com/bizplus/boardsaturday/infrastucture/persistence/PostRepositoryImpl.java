@@ -1,12 +1,17 @@
 package com.bizplus.boardsaturday.infrastucture.persistence;
 
+import com.bizplus.boardsaturday.domain.common.BaseEntity;
 import com.bizplus.boardsaturday.domain.dto.PostWithCategoryDto;
 import com.bizplus.boardsaturday.domain.dto.QPostWithCategoryDto;
+import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.entity.Post;
 import com.bizplus.boardsaturday.domain.repository.PostRepository;
+import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import com.bizplus.boardsaturday.infrastucture.persistence.jpa.JpaPostRepository;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -64,6 +69,47 @@ public class PostRepositoryImpl implements PostRepository {
                 .orderBy(post.createdAt.desc())
                 .fetch();
     }
+
+    @Override
+    public List<Post> searchBy(Category category, ActiveStatus activeStatus, String title, String body) {
+        BooleanBuilder booleanBuilder = toBooleanBuilder(category, activeStatus, title, body);
+
+        return query
+                .selectFrom(post)
+                .innerJoin(post.category).fetchJoin()
+                .where(booleanBuilder)
+                .orderBy(post.createdAt.desc())
+                .fetch();
+    }
+
+    private BooleanBuilder toBooleanBuilder(Category category, ActiveStatus activeStatus, String title, String body) {
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(eqCategory(category));
+        builder.and(eqActiveStatus(activeStatus));
+        builder.and(likeTitle(title));
+        builder.and(likeBody(body));
+        return builder;
+    }
+
+    private BooleanExpression eqCategory(Category category) {
+        return category != null ? post.category.eq(category) : null;
+    }
+
+    private BooleanExpression eqActiveStatus(ActiveStatus activeStatus) {
+        return activeStatus != null ? post.activeStatus.eq(activeStatus) : null;
+    }
+
+    private BooleanExpression likeTitle(String title) {
+        String condition = title == null ? "" : title;
+        return post.title.likeIgnoreCase("%" + condition + "%");
+    }
+
+    private BooleanExpression likeBody(String body) {
+        String condition = body == null ? "" : body;
+        return post.body.likeIgnoreCase("%" + condition + "%");
+    }
+
+
 
     private ConstructorExpression<PostWithCategoryDto> selectPostWithCategory() {
         return new QPostWithCategoryDto(
