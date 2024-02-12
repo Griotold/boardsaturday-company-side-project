@@ -12,8 +12,12 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +26,6 @@ import java.util.Optional;
 
 import static com.bizplus.boardsaturday.domain.entity.QPost.post;
 import static com.bizplus.boardsaturday.domain.entity.QCategory.category;
-
 @Repository
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepository {
@@ -80,6 +83,24 @@ public class PostRepositoryImpl implements PostRepository {
                 .where(booleanBuilder)
                 .orderBy(post.createdAt.desc())
                 .fetch();
+    }
+
+    @Override
+    public Page<Post> searchByPage(Category category, ActiveStatus activeStatus, String title, String body, Pageable pageable) {
+        BooleanBuilder booleanBuilder = toBooleanBuilder(category, activeStatus, title, body);
+
+        List<Post> content = query
+                .selectFrom(post)
+                .innerJoin(post.category).fetchJoin()
+                .where(booleanBuilder)
+                .orderBy(post.createdAt.desc())
+                .fetch();
+
+        JPAQuery<Long> count = query.select(post.count())
+                .from(post)
+                .where(booleanBuilder);
+
+        return PageableExecutionUtils.getPage(content, pageable, count::fetchOne);
     }
 
     private BooleanBuilder toBooleanBuilder(Category category, ActiveStatus activeStatus, String title, String body) {
