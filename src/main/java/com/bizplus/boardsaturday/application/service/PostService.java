@@ -5,6 +5,7 @@ import com.bizplus.boardsaturday.application.component.post.PostDeleter;
 import com.bizplus.boardsaturday.application.component.post.PostQuery;
 import com.bizplus.boardsaturday.application.component.post.PostUpdater;
 import com.bizplus.boardsaturday.application.request.post.CreatePostRequest;
+import com.bizplus.boardsaturday.application.request.post.UpdatePostRequest;
 import com.bizplus.boardsaturday.application.response.post.PostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,9 @@ public class PostService {
 
     public void delete(Long id) {
         postDeleter.delete(id);
+    }
+
+    public void update(UpdatePostRequest request, Long id) {
+        postUpdater.update(request, id);
     }
 }
