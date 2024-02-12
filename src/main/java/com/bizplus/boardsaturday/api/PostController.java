@@ -4,9 +4,14 @@ import com.bizplus.boardsaturday.application.request.post.CreatePostRequest;
 import com.bizplus.boardsaturday.application.request.post.UpdatePostRequest;
 import com.bizplus.boardsaturday.application.response.post.PostResponse;
 import com.bizplus.boardsaturday.application.service.PostService;
+import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import com.bizplus.boardsaturday.global.response.ResponseDto;
 import com.bizplus.boardsaturday.global.response.ResponseStatus;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,11 +26,24 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
-    @GetMapping
+//    @GetMapping
     public ResponseEntity<?> findAll() {
         List<PostResponse> all = postService.findAll();
         ResponseDto<List<PostResponse>> responseDto
                 = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), all);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> findAllWithPage(@RequestParam(value = "categoryId", required = false) Long categoryId,
+                                             @RequestParam(value = "status", required = false) ActiveStatus activeStatus,
+                                             @RequestParam(value = "title", required = false) String title,
+                                             @RequestParam(value = "body", required = false) String body,
+                                             Pageable pageable) {
+        Page<PostResponse> all = postService.searchWithPage(categoryId, activeStatus, title, body, pageable);
+        ResponseDto<Page<PostResponse>> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), all);
+
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 

@@ -1,1 +1,1 @@
-GET localhost:8080/api/posts
+GET localhost:8080/api/posts?size=10

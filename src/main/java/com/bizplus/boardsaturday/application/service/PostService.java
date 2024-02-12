@@ -7,7 +7,10 @@ import com.bizplus.boardsaturday.application.component.post.PostUpdater;
 import com.bizplus.boardsaturday.application.request.post.CreatePostRequest;
 import com.bizplus.boardsaturday.application.request.post.UpdatePostRequest;
 import com.bizplus.boardsaturday.application.response.post.PostResponse;
+import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +24,12 @@ public class PostService {
     private final PostDeleter postDeleter;
 
     public List<PostResponse> findAll() {return postQuery.findAll();}
+
+    public Page<PostResponse> searchWithPage(Long categoryId, ActiveStatus activeStatus,
+                                             String title, String body,
+                                             Pageable pageable) {
+        return postQuery.searchWithPage(categoryId, activeStatus, title, body, pageable);
+    }
 
     public void create(CreatePostRequest request) {
         postCreator.create(request);

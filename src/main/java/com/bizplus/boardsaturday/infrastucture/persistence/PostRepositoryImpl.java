@@ -93,7 +93,6 @@ public class PostRepositoryImpl implements PostRepository {
                 .selectFrom(post)
                 .innerJoin(post.category).fetchJoin()
                 .where(booleanBuilder)
-                .orderBy(post.createdAt.desc())
                 .fetch();
 
         JPAQuery<Long> count = query.select(post.count())
