@@ -46,6 +46,16 @@ public class PostRepositoryImpl implements PostRepository {
         return jpaPostRepository.findById(id);
     }
 
+    @Override
+    public Optional<Post> findByIdWithCategory(Long id) {
+        List<Post> result = query
+                .selectFrom(post)
+                .innerJoin(post.category, category).fetchJoin()
+                .where(post.id.eq(id))
+                .fetch();
+        return Optional.of(result.get(0));
+    }
+
     private ConstructorExpression<PostWithCategoryDto> selectPostWithCategory() {
         return new QPostWithCategoryDto(
                 post.id,
