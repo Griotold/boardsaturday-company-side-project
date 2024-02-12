@@ -64,8 +64,7 @@ public class Post extends BaseTimeEntity {
     }
 
     public void update(UpdatePostRequest request, Category category) {
-        // todo 동일성 - id값이 같으면 같은 동일함을 보장한다고 알고있는데 확인후 코드 변경
-        if (this.category.getId().longValue() != category.getId().longValue()) {
+        if (!this.category.equals(category)) {
             this.category = category;
         }
         title = request.getTitle();
