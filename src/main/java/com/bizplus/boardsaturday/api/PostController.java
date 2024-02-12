@@ -1,6 +1,7 @@
 package com.bizplus.boardsaturday.api;
 
 import com.bizplus.boardsaturday.application.request.post.CreatePostRequest;
+import com.bizplus.boardsaturday.application.request.post.UpdatePostRequest;
 import com.bizplus.boardsaturday.application.response.post.PostResponse;
 import com.bizplus.boardsaturday.application.service.PostService;
 import com.bizplus.boardsaturday.global.response.ResponseDto;
@@ -65,8 +66,18 @@ public class PostController {
                 = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), null);
 
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updatePost(@RequestBody @Validated UpdatePostRequest request,
+                                        BindingResult bindingResult,
+                                        @PathVariable Long id) {
+        postService.update(request, id);
 
+        ResponseDto<Object> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), null);
+
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
 }

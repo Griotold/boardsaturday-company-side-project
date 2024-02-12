@@ -15,4 +15,6 @@ public interface PostRepository {
     List<PostWithCategoryDto> findAllOrderByCreatedAt();
 
     Optional<Post> findById(Long id);
+
+    Optional<Post> findByIdWithCategory(Long id);
 }

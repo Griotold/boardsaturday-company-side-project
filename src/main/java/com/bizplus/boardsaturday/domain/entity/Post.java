@@ -1,5 +1,6 @@
 package com.bizplus.boardsaturday.domain.entity;
 
+import com.bizplus.boardsaturday.application.request.post.UpdatePostRequest;
 import com.bizplus.boardsaturday.domain.common.BaseTimeEntity;
 import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import com.bizplus.boardsaturday.domain.type.DeleteStatus;
@@ -30,7 +31,7 @@ public class Post extends BaseTimeEntity {
 
     private String body;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -56,6 +57,20 @@ public class Post extends BaseTimeEntity {
         postTags.add(postTag);
     }
 
+    public void update(UpdatePostRequest request) {
+        title = request.getTitle();
+        body = request.getBody();
+
+    }
+
+    public void update(UpdatePostRequest request, Category category) {
+        if (!this.category.equals(category)) {
+            this.category = category;
+        }
+        title = request.getTitle();
+        body = request.getBody();
+    }
+
     public void changeStatusOn() {
         this.activeStatus = ActiveStatus.ACTIVE;
     }
@@ -67,4 +82,7 @@ public class Post extends BaseTimeEntity {
     public void delete() {
         this.deleteStatus = DeleteStatus.DELETED;
     }
+
+
+
 }
