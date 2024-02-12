@@ -39,7 +39,7 @@ public class PostController {
                                              @RequestParam(value = "status", required = false) ActiveStatus activeStatus,
                                              @RequestParam(value = "title", required = false) String title,
                                              @RequestParam(value = "body", required = false) String body,
-                                             Pageable pageable) {
+                                             @PageableDefault(size = 5) Pageable pageable) {
         Page<PostResponse> all = postService.searchWithPage(categoryId, activeStatus, title, body, pageable);
         ResponseDto<Page<PostResponse>> responseDto
                 = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), all);

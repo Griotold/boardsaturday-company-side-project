@@ -13,6 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -100,5 +103,20 @@ class PostRepositoryImplTest {
         // then
         assertThat(postsByTitle.size()).isEqualTo(3);
         assertThat(postsByNull.size()).isEqualTo(6);
+    }
+
+    @Test
+    void page() throws Exception {
+        // given
+        Pageable pageable = PageRequest.of(0, 5);
+
+        // when
+        Page<Post> postPage = postRepository.searchByPage(null, null, null, null, pageable);
+        for (Post post : postPage) {
+            log.info("post = {}", post.getTitle());
+        }
+
+        // then
+        assertThat(postPage.getSize()).isEqualTo(5);
     }
 }
