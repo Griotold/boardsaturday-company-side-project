@@ -17,4 +17,6 @@ public interface PostRepository {
     Optional<Post> findById(Long id);
 
     Optional<Post> findByIdWithCategory(Long id);
+
+    List<Post> findAllWithCategoryAndTags();
 }

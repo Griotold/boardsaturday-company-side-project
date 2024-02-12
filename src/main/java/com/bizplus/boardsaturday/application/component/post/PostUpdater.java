@@ -27,7 +27,7 @@ public class PostUpdater {
 
 
     public void update(UpdatePostRequest request, Long id) {
-        Post post = postRepository.findById(id)
+        Post post = postRepository.findByIdWithCategory(id)
                 .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
 
         Category category = categoryRepository.findById(request.getCategoryId())

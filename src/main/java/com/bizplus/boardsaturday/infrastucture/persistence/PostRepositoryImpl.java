@@ -56,6 +56,15 @@ public class PostRepositoryImpl implements PostRepository {
         return Optional.of(result.get(0));
     }
 
+    @Override
+    public List<Post> findAllWithCategoryAndTags() {
+        return query.select(post)
+                .from(post)
+                .innerJoin(post.category).fetchJoin()
+                .orderBy(post.createdAt.desc())
+                .fetch();
+    }
+
     private ConstructorExpression<PostWithCategoryDto> selectPostWithCategory() {
         return new QPostWithCategoryDto(
                 post.id,
