@@ -2,10 +2,12 @@ package com.bizplus.boardsaturday.application.response.post;
 
 import com.bizplus.boardsaturday.domain.dto.PostWithCategoryDto;
 import com.bizplus.boardsaturday.domain.entity.Post;
+import com.bizplus.boardsaturday.domain.entity.PostTag;
 import com.bizplus.boardsaturday.global.util.DateFormatUtil;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +23,7 @@ public class PostResponse {
     private final String createdAt;
     private final String updatedAt;
     private final String categoryName;
-    private final List<String> tagNames;
+    private List<TagDto> tags = new ArrayList<>();
 
     public PostResponse(Post post) {
         this.id = post.getId();
@@ -32,6 +34,16 @@ public class PostResponse {
         this.createdAt = DateFormatUtil.toStringFormat(post.getCreatedAt());
         this.updatedAt = DateFormatUtil.toStringFormat(post.getUpdatedAt());
         this.categoryName = post.getCategory().getName();
-        this.tagNames = post.getPostTags().stream().map((pt) -> pt.getTag().getName()).collect(Collectors.toList());
+        this.tags = post.getPostTags().stream().map(TagDto::new).collect(Collectors.toList());
+    }
+    @Getter
+    private static class TagDto {
+        private Long tagId;
+        private String tagName;
+
+        private TagDto(PostTag postTag) {
+            this.tagId = postTag.getTag().getId();
+            this.tagName = postTag.getTag().getName();
+        }
     }
 }
