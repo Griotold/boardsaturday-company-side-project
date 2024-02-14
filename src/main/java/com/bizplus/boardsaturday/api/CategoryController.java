@@ -5,6 +5,7 @@ import com.bizplus.boardsaturday.application.request.category.OrderChangeCategor
 import com.bizplus.boardsaturday.application.request.category.UpdateCategoryRequest;
 import com.bizplus.boardsaturday.application.response.category.CategoryDetailResponse;
 import com.bizplus.boardsaturday.application.response.category.CategoryResponse;
+import com.bizplus.boardsaturday.application.response.category.CategoryWithPostCountResponse;
 import com.bizplus.boardsaturday.application.service.CategoryService;
 import com.bizplus.boardsaturday.global.response.ResponseDto;
 import com.bizplus.boardsaturday.global.response.ResponseStatus;
@@ -24,10 +25,17 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    @GetMapping
+//    @GetMapping
     public ResponseEntity<?> findAll() {
         List<CategoryResponse> all = categoryService.findAll();
         ResponseDto<List<CategoryResponse>> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), all);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+    @GetMapping
+    public ResponseEntity<?> findAllWithPostCount() {
+        List<CategoryWithPostCountResponse> all = categoryService.findAllWithPostCount();
+        ResponseDto<List<CategoryWithPostCountResponse>> responseDto
                 = new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), all);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }

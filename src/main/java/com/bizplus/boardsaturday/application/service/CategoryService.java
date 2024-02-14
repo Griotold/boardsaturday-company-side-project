@@ -8,6 +8,7 @@ import com.bizplus.boardsaturday.application.request.category.CreateCategoryRequ
 import com.bizplus.boardsaturday.application.request.category.UpdateCategoryRequest;
 import com.bizplus.boardsaturday.application.response.category.CategoryDetailResponse;
 import com.bizplus.boardsaturday.application.response.category.CategoryResponse;
+import com.bizplus.boardsaturday.application.response.category.CategoryWithPostCountResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,10 @@ public class CategoryService {
 
     public List<CategoryResponse> findAll() {
         return categoryQuery.findAll();
+    }
+
+    public List<CategoryWithPostCountResponse> findAllWithPostCount() {
+        return categoryQuery.findAllWithPostCount();
     }
 
     public CategoryResponse create(CreateCategoryRequest request) {
