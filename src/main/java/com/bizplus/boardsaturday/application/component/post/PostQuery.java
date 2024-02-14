@@ -1,7 +1,6 @@
 package com.bizplus.boardsaturday.application.component.post;
 
 import com.bizplus.boardsaturday.application.response.post.PostResponse;
-import com.bizplus.boardsaturday.domain.dto.PostWithCategoryDto;
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.entity.Post;
 import com.bizplus.boardsaturday.domain.repository.CategoryRepository;
