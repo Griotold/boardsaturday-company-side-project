@@ -1,8 +1,11 @@
 package com.bizplus.boardsaturday.infrastucture.persistence;
 
+import com.bizplus.boardsaturday.domain.dto.CategoryWithPostCountDto;
+import com.bizplus.boardsaturday.domain.dto.QCategoryWithPostCountDto;
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.repository.CategoryRepository;
 import com.bizplus.boardsaturday.infrastucture.persistence.jpa.JpaCategoryRepository;
+import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -11,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.bizplus.boardsaturday.domain.entity.QCategory.*;
+import static com.bizplus.boardsaturday.domain.entity.QPost.*;
 
 @Repository
 @RequiredArgsConstructor
@@ -66,6 +70,25 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 .fetchOne();
     }
 
+    @Override
+    public List<CategoryWithPostCountDto> findAllWithPostCount() {
+        return query.select(selectCategoryWithPostCountDto())
+                .from(post)
+                .innerJoin(post.category, category)
+                .orderBy(category.displayOrder.asc())
+                .groupBy(category.id)
+                .fetch();
+    }
 
+    private ConstructorExpression<CategoryWithPostCountDto> selectCategoryWithPostCountDto() {
+        return new QCategoryWithPostCountDto(
+                category.id,
+                category.name,
+                category.description,
+                category.displayOrder,
+                category.status,
+                post.count()
+        );
+    }
 
 }

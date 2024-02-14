@@ -1,5 +1,6 @@
 package com.bizplus.boardsaturday.domain.repository;
 
+import com.bizplus.boardsaturday.domain.dto.CategoryWithPostCountDto;
 import com.bizplus.boardsaturday.domain.entity.Category;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface CategoryRepository {
     Long count();
 
     Long countForUpdateDisplayOrder(List<Long> ids);
+
+    List<CategoryWithPostCountDto> findAllWithPostCount();
 }
