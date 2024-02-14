@@ -83,6 +83,4 @@ public class Post extends BaseTimeEntity {
         this.deleteStatus = DeleteStatus.DELETED;
     }
 
-
-
 }
