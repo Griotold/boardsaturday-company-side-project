@@ -1,0 +1,7 @@
+#datasources
+spring:
+  datasource:
+    url: jdbc:mysql://175.210.112.200:3006/board-saturday?useSSL=false&serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: bizplus
+    password: bizplus

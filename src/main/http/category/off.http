@@ -1,0 +1,2 @@
+PUT http://localhost:8080/api/categories/1/off
+Content-Type: application/json

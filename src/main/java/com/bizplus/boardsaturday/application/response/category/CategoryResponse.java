@@ -1,12 +1,10 @@
-package com.bizplus.boardsaturday.application.response;
+package com.bizplus.boardsaturday.application.response.category;
 
 import com.bizplus.boardsaturday.domain.entity.Category;
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 public class CategoryResponse {
-
     private final Long id;
     private final String name;
     private final String description;

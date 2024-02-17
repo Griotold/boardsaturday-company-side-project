@@ -1,4 +1,4 @@
-package com.bizplus.boardsaturday.application.request;
+package com.bizplus.boardsaturday.application.request.category;
 
 import lombok.AccessLevel;
 import lombok.Getter;

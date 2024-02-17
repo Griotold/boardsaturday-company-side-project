@@ -1,25 +1,31 @@
 package com.bizplus.boardsaturday.api;
 
-import com.bizplus.boardsaturday.application.request.CreateCategoryRequest;
+import com.bizplus.boardsaturday.application.component.category.CategoryCreator;
+import com.bizplus.boardsaturday.application.request.category.CreateCategoryRequest;
+import com.bizplus.boardsaturday.domain.entity.Category;
+import com.bizplus.boardsaturday.domain.repository.CategoryRepository;
+import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @Transactional
 @Slf4j
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 class CategoryControllerTest {
 
@@ -28,6 +34,18 @@ class CategoryControllerTest {
 
     @Autowired
     private ObjectMapper om;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @BeforeEach
+    void dataSet() {
+        for (int i = 0; i < 10; i++) {
+            Category category
+                    = new Category("category" + i, "description" + i, i + 1, ActiveStatus.ACTIVE);
+            categoryRepository.create(category);
+        }
+    }
 
     @Test
     @DisplayName("CategoryController.findAll()")

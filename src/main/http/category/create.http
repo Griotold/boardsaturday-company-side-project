@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/categories
+Content-Type: application/json
+
+{
+  "name" : "junk",
+  "description": "a category that will contain a lot of miscellaneous content"
+}

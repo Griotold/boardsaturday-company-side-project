@@ -1,0 +1,7 @@
+PUT http://localhost:8080/api/categories/1
+Content-Type: application/json
+
+{
+  "name" : "junk222",
+  "description": "222a category that will contain a lot of miscellaneous content222"
+}

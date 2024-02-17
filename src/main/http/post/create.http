@@ -1,0 +1,9 @@
+POST http://localhost:8080/api/posts
+Content-Type: application/json
+
+{
+  "categoryId" : 1,
+  "title" : "즐거운 주말",
+  "body" : "하하하라라라",
+  "tagIds": [1, 2, 5, 7]
+}

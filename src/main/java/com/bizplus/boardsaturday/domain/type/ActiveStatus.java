@@ -1,5 +1,5 @@
 package com.bizplus.boardsaturday.domain.type;
 
-public enum CategoryStatus {
+public enum ActiveStatus {
     ACTIVE, INACTIVE;
 }
