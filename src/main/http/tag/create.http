@@ -2,5 +2,5 @@ POST http://localhost:8080/api/tags
 Content-Type: application/json
 
 {
-  "name" : "카페"
+  "name" : "영화"
 }

@@ -30,7 +30,7 @@ public class TagController {
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
-    // todo 질문 1. url에 한글이 들어가게 해도 괜찮을지
+    // 얘는 쓸 필요가 없음
     @GetMapping("/{name}")
     public ResponseEntity<?> findByName(@PathVariable String name) {
         TagResponse tagResponse = tagService.findByName(name);
