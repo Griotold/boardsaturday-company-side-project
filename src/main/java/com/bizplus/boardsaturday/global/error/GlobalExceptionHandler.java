@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Map;
 
 @Slf4j
@@ -59,6 +60,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(e.getErrorCode().getHttpStatus())
                 .body(errorResponse);
     }
+
+    /**
+     * EntityNotFoundException
+     */
+    @ExceptionHandler(EntityNotFoundException.class)
+    protected ResponseEntity<ErrorResponse<?>> handleEntityNotFoundException(EntityNotFoundException e) {
+        log.error("handleEntityNotFoundException", e);
+        ErrorResponse<EntityNotFoundException> errorResponse
+                = new ErrorResponse<>(ErrorCode.ENTITY_NOT_FOUND.getErrorCode(), e.getMessage(), null);
+        return ResponseEntity.status(ErrorCode.ENTITY_NOT_FOUND.getHttpStatus())
+                .body(errorResponse);
+    }
+
     /**
      * 나머지 예외 발생
      */
