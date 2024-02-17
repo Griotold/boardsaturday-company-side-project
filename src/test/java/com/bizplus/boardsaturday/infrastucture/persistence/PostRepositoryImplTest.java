@@ -4,8 +4,11 @@ import com.bizplus.boardsaturday.application.component.post.PostCreator;
 import com.bizplus.boardsaturday.application.request.post.CreatePostRequest;
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.entity.Post;
+import com.bizplus.boardsaturday.domain.entity.PostTag;
+import com.bizplus.boardsaturday.domain.entity.Tag;
 import com.bizplus.boardsaturday.domain.repository.CategoryRepository;
 import com.bizplus.boardsaturday.domain.repository.PostRepository;
+import com.bizplus.boardsaturday.domain.repository.TagRepository;
 import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
@@ -20,7 +23,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -42,6 +48,9 @@ class PostRepositoryImplTest {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    TagRepository tagRepository;
+
     @BeforeEach
     void dataSet() {
         em.createNativeQuery("ALTER TABLE category ALTER COLUMN category_id RESTART WITH 1").executeUpdate();
@@ -53,14 +62,22 @@ class PostRepositoryImplTest {
         Category category2 = new Category("category2", "des2", 2, ActiveStatus.ACTIVE);
         categoryRepository.create(category1);
         categoryRepository.create(category2);
+        tagRepository.create(new Tag("tag1"));
+        tagRepository.create(new Tag("tag2"));
+        tagRepository.create(new Tag("tag3"));
+        List<Long> tagIds1 = new ArrayList<>();
+        tagIds1.add(1L);
+        tagIds1.add(2L);
+        List<Long> tagIds2 = new ArrayList<>();
+        tagIds2.add(2L);
+        tagIds2.add(3L);
 
-        postCreator.create(new CreatePostRequest(1L, "title1", "body1", List.of()));
-        postCreator.create(new CreatePostRequest(1L, "title222", "body1", List.of()));
-        postCreator.create(new CreatePostRequest(1L, "title3", "body1", List.of()));
-        postCreator.create(new CreatePostRequest(2L, "title224", "body1", List.of()));
-        postCreator.create(new CreatePostRequest(2L, "title5", "body1", List.of()));
-        postCreator.create(new CreatePostRequest(2L, "title226", "body1", List.of()));
-
+        postCreator.create(new CreatePostRequest(1L, "title1", "body1", tagIds1));
+        postCreator.create(new CreatePostRequest(1L, "title222", "body1", tagIds2));
+        postCreator.create(new CreatePostRequest(1L, "title3", "body1", tagIds1));
+        postCreator.create(new CreatePostRequest(2L, "title224", "body1", tagIds2));
+        postCreator.create(new CreatePostRequest(2L, "title5", "body1", tagIds1));
+        postCreator.create(new CreatePostRequest(2L, "title226", "body1", tagIds2));
     }
 
     @Test
@@ -118,5 +135,28 @@ class PostRepositoryImplTest {
 
         // then
         assertThat(postPage.getSize()).isEqualTo(5);
+    }
+
+    @Test
+    void findOneWithFetch() throws Exception {
+        // given
+        Long id = 1L;
+
+        // when
+        Post post = postRepository.findByIdWithFetch(1L)
+                .orElseThrow(EntityNotFoundException::new);
+
+        log.info("post.categoryName = {}", post.getCategory().getName());
+        log.info("post.title = {}", post.getTitle());
+        List<PostTag> postTags = post.getPostTags();
+        for (PostTag postTag : postTags) {
+            String tagName = postTag.getTag().getName();
+            log.info("tagName = {}", tagName);
+        }
+
+        // then
+        assertThat(post.getCategory().getName()).isEqualTo("category1");
+        assertThat(post.getPostTags().get(0).getTag().getName()).isEqualTo("tag1");
+        assertThat(post.getPostTags().get(1).getTag().getName()).isEqualTo("tag2");
     }
 }

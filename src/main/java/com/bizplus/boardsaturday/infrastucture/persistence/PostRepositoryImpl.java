@@ -26,6 +26,9 @@ import java.util.Optional;
 
 import static com.bizplus.boardsaturday.domain.entity.QPost.post;
 import static com.bizplus.boardsaturday.domain.entity.QCategory.category;
+import static com.bizplus.boardsaturday.domain.entity.QPostTag.postTag;
+import static com.bizplus.boardsaturday.domain.entity.QTag.tag;
+
 @Repository
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepository {
@@ -52,6 +55,23 @@ public class PostRepositoryImpl implements PostRepository {
     @Override
     public Optional<Post> findById(Long id) {
         return jpaPostRepository.findById(id);
+    }
+
+    // "select distinct o from Order o" +
+    //" join fetch o.member m" +
+    //" join fetch o.delivery d" +
+    //" join fetch o.orderItems oi" +
+    //" join fetch oi.item i", Order.class)
+    @Override
+    public Optional<Post> findByIdWithFetch(Long id) {
+        Post findPost = query.selectFrom(post)
+                .innerJoin(post.category).fetchJoin()
+                .innerJoin(post.postTags, postTag).fetchJoin()
+                .innerJoin(postTag.tag, tag).fetchJoin()
+                .where(post.id.eq(id))
+                .fetchOne();
+
+        return Optional.ofNullable(findPost);
     }
 
     @Override
