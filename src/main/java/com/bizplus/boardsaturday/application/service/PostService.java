@@ -50,4 +50,8 @@ public class PostService {
     public void update(UpdatePostRequest request, Long id) {
         postUpdater.update(request, id);
     }
+
+    public PostResponse findOneWithFetch(Long id) {
+        return postQuery.findOneWithFetch(id);
+    }
 }

@@ -22,6 +22,7 @@ public class PostResponse {
     private final String deleteStatus;
     private final String createdAt;
     private final String updatedAt;
+    private final Long categoryId;
     private final String categoryName;
     private List<TagDto> tags = new ArrayList<>();
 
@@ -33,13 +34,14 @@ public class PostResponse {
         this.deleteStatus = post.getDeleteStatus().name();
         this.createdAt = DateFormatUtil.toStringFormat(post.getCreatedAt());
         this.updatedAt = DateFormatUtil.toStringFormat(post.getUpdatedAt());
+        this.categoryId = post.getCategory().getId();
         this.categoryName = post.getCategory().getName();
         this.tags = post.getPostTags().stream().map(TagDto::new).collect(Collectors.toList());
     }
     @Getter
     private static class TagDto {
-        private Long tagId;
-        private String tagName;
+        private final Long tagId;
+        private final String tagName;
 
         private TagDto(PostTag postTag) {
             this.tagId = postTag.getTag().getId();

@@ -46,6 +46,12 @@ public class PostQuery {
         Page<Post> postPage = postRepository.searchByPage(category, activeStatus, title, body, pageable);
         return postPage
                 .map(PostResponse::new);
+    }
 
+    public PostResponse findOneWithFetch(Long id) {
+        Post post = postRepository.findByIdWithFetch(id)
+                .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
+
+        return new PostResponse(post);
     }
 }

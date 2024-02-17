@@ -98,4 +98,14 @@ public class PostController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findOnePost(@PathVariable Long id) {
+        PostResponse postResponse = postService.findOneWithFetch(id);
+
+        ResponseDto<PostResponse> responseDto =
+                new ResponseDto<>(ResponseStatus.GOOD.getCode(), ResponseStatus.GOOD.getMessage(), postResponse);
+
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
 }
