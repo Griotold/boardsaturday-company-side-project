@@ -80,6 +80,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 .fetch();
     }
 
+
     private ConstructorExpression<CategoryWithPostCountDto> selectCategoryWithPostCountDto() {
         return new QCategoryWithPostCountDto(
                 category.id,
