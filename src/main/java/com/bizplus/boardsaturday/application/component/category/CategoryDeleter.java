@@ -3,6 +3,8 @@ package com.bizplus.boardsaturday.application.component.category;
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.repository.CategoryRepository;
 import com.bizplus.boardsaturday.domain.repository.PostRepository;
+import com.bizplus.boardsaturday.global.error.ErrorCode;
+import com.bizplus.boardsaturday.global.error.ex.CategoryReferencedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +24,7 @@ public class CategoryDeleter {
 
         Long count = postRepository.getCountByCategory(category);
         if (count > 0) {
-            throw new IllegalStateException("게시글이 참조하고 있는 카테고리입니다. 삭제할 수 없습니다.");
+            throw new CategoryReferencedException(ErrorCode.CONFLICT, "게시글이 참조하는 카테고리입니다. 삭제할 수 없습니다.");
         }
 
         categoryRepository.delete(category);
