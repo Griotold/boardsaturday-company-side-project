@@ -18,6 +18,9 @@ public class CategoryDeleter {
     private final CategoryRepository categoryRepository;
     private final PostRepository postRepository;
 
+    /**
+     * @throws CategoryReferencedException 게시글이 참조하는 카테고리일 경우
+     * */
     public void delete(Long id) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("카테고리를 찾을 수 없습니다."));
