@@ -120,6 +120,14 @@ public class PostRepositoryImpl implements PostRepository {
         return PageableExecutionUtils.getPage(content, pageable, count::fetchOne);
     }
 
+    @Override
+    public Long getCountByCategory(Category category) {
+        return query.select(post.count())
+                .from(post)
+                .where(post.category.eq(category))
+                .fetchOne();
+    }
+
     private BooleanBuilder toBooleanBuilder(Category category, ActiveStatus activeStatus, String title, String body) {
         BooleanBuilder builder = new BooleanBuilder();
         builder.and(eqCategory(category));

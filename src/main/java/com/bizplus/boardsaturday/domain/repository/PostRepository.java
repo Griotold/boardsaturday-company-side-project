@@ -29,4 +29,6 @@ public interface PostRepository {
     List<Post> searchBy(Category category, ActiveStatus activeStatus, String title, String body);
 
     Page<Post> searchByPage(Category category, ActiveStatus activeStatus, String title, String body, Pageable pageable);
+
+    Long getCountByCategory(Category category);
 }
