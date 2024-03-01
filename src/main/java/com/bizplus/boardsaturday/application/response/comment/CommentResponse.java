@@ -29,7 +29,7 @@ public class CommentResponse {
         this.memberEmail = comment.getMember().getEmail();
         this.activeStatus = comment.getActiveStatus().name();
         this.deleteStatus = comment.getDeleteStatus().name();
-        this.parentId = comment.getParent().getId();
-        this.parentContent = comment.getParent().getContent();
+        this.parentId = (comment.getParent() != null) ? comment.getParent().getId() : null;
+        this.parentContent = (comment.getParent() != null) ? comment.getParent().getContent() : null;
     }
 }
