@@ -41,6 +41,10 @@ public class CreatePostRequest {
     }
 
     public Post toEntity(Category category) {
-        return new Post(title, body, category, ActiveStatus.ACTIVE, DeleteStatus.EXISTING);
+        return new Post(title,
+                body,
+                category,
+                ActiveStatus.ACTIVE,
+                DeleteStatus.EXISTING);
     }
 }
