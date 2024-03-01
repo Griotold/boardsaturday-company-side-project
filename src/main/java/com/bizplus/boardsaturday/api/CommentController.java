@@ -45,6 +45,16 @@ public class CommentController {
                     ResponseStatus.GOOD.getMessage(),
                     null);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteComment(@PathVariable Long id) {
+        commentService.delete(id);
+
+        ResponseDto<Object> responseDto
+                = new ResponseDto<>(ResponseStatus.GOOD.getCode(),
+                    ResponseStatus.GOOD.getMessage(),
+                    null);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }
