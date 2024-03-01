@@ -2,7 +2,8 @@ POST http://localhost:8080/api/comments
 Content-Type: application/json
 
 {
-  "memberId": 1,
-  "postId": 6,
-  "content": "comment content search test"
+  "memberId": 2,
+  "postId": 7,
+  "content": "대댓글 테스트",
+  "parentId": 13
 }
