@@ -40,13 +40,16 @@ public class CreateCommentRequest {
         this.content = content;
     }
 
-    // 일단은 일반적인 댓글로 가정해서 대댓글은 논외로 하자
-    public Comment toEntity(Member member, Post post) {
+    public Comment toEntity(Member member, Post post, Comment parent) {
         return new Comment(this.content,
                 ActiveStatus.ACTIVE,
                 DeleteStatus.EXISTING,
                 post,
                 member,
-                null);
+                parent);
+    }
+
+    public boolean isReply() {
+        return this.parentId != null;
     }
 }
