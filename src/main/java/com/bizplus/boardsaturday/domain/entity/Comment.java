@@ -57,4 +57,16 @@ public class Comment extends BaseTimeEntity {
         this.member = member;
         this.parent = parent;
     }
+
+    public void changeStatusOn() {
+        this.activeStatus = ActiveStatus.ACTIVE;
+    }
+
+    public void changeStatusOff() {
+        this.activeStatus = ActiveStatus.INACTIVE;
+    }
+
+    public void delete() {
+        this.deleteStatus = DeleteStatus.DELETED;
+    }
 }
