@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/comments
+Content-Type: application/json
+
+{
+  "memberId": 1,
+  "postId": 1,
+  "content": "오늘은 삼일절! 대한독립 만세!"
+}
