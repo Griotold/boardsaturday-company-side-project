@@ -32,4 +32,14 @@ public class Member extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private DeleteStatus deleteStatus;
+
+    public Member(String name,
+                  String email,
+                  ActiveStatus activeStatus,
+                  DeleteStatus deleteStatus) {
+        this.name = name;
+        this.email = email;
+        this.activeStatus = activeStatus;
+        this.deleteStatus = deleteStatus;
+    }
 }
