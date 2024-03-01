@@ -1,20 +1,16 @@
 # 추가사항
 ## 1. API
-- 페이징 및 검색 가능한 post list
-- post 등록
-- post 활성화 / 비활성화
-- 수정
+- 댓글 생성
+  - 일반 댓글
+  - 대댓글
+- 댓글 리스트 - 페이징, 검색조건
+- 활성화, 비활성화
 - 삭제
-- 태그 검색 또는 등록
-- 단일 게시글 조회
-## 2. 테스트환경, 개발환경 분리
-## 3. .http 도입
-## 4. GlobalExceptionHandler 에러 처리 추가
 
 ---
 
 # ERD
-![2주차 ERD](https://github.com/Griotold/bankshop-griotold/assets/101307758/644ff900-a2f5-4eac-9096-d95fb243aff4)
+![댓글_ERD_2024-03-01](https://github.com/Griotold/bankshop-griotold/assets/101307758/d23e1138-9e9b-4eae-893a-48db01288d91)
 
 ---
 # 테스트시 id값 초기화하기

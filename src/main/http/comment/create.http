@@ -1,0 +1,9 @@
+POST http://localhost:8080/api/comments
+Content-Type: application/json
+
+{
+  "memberId": 2,
+  "postId": 7,
+  "content": "대댓글 테스트",
+  "parentId": 13
+}

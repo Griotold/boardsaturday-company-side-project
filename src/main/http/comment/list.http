@@ -1,0 +1,2 @@
+// 모래 알 : %EB%AA%A8%EB%9E%98%20%EC%95%8C
+GET http://localhost:8080/api/comments?size=15

@@ -1,1 +1,1 @@
-GET localhost:8080/api/posts?status=ACTIVE&title=1
+GET localhost:8080/api/posts

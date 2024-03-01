@@ -25,4 +25,5 @@ public interface CategoryRepository {
     Long countForUpdateDisplayOrder(List<Long> ids);
 
     List<CategoryWithPostCountDto> findAllWithPostCount();
+
 }

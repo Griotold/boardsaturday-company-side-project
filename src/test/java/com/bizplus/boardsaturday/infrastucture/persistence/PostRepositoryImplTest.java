@@ -13,6 +13,7 @@ import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -158,5 +159,35 @@ class PostRepositoryImplTest {
         assertThat(post.getCategory().getName()).isEqualTo("category1");
         assertThat(post.getPostTags().get(0).getTag().getName()).isEqualTo("tag1");
         assertThat(post.getPostTags().get(1).getTag().getName()).isEqualTo("tag2");
+    }
+
+    @Test
+    @DisplayName("카테고리를 참조하고 있는 포스트 개수")
+    void getCountByCategory_test() throws Exception {
+        // given
+        Long id = 1L;
+        Category category = categoryRepository.findById(id).get();
+
+        // when
+        Long count = postRepository.getCountByCategory(category);
+        log.info("count = {}", count);
+
+        // then
+        assertThat(count).isEqualTo(3L);
+    }
+
+    @Test
+    @DisplayName("getCountByCategory - 포스트가 참조하지 않는 카테고리는 0을 리턴")
+    void getCountByCategory_test2() throws Exception {
+        // given
+        Category category3 = new Category("category3", "des3", 3, ActiveStatus.ACTIVE);
+        categoryRepository.create(category3);
+
+        // when
+        Long count = postRepository.getCountByCategory(category3);
+        log.info("count = {}", count);
+
+        // then
+        assertThat(count).isEqualTo(0L);
     }
 }
