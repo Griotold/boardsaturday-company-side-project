@@ -6,6 +6,7 @@ import com.bizplus.boardsaturday.domain.type.DeleteStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -43,4 +44,17 @@ public class Comment extends BaseTimeEntity {
     @JoinColumn(name = "parent_id")
     private Comment parent;
 
+    public Comment(String content,
+                   ActiveStatus activeStatus,
+                   DeleteStatus deleteStatus,
+                   Post post,
+                   Member member,
+                   Comment parent) {
+        this.content = content;
+        this.activeStatus = activeStatus;
+        this.deleteStatus = deleteStatus;
+        this.post = post;
+        this.member = member;
+        this.parent = parent;
+    }
 }
