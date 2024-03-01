@@ -60,7 +60,7 @@ public class CommentRepositoryImpl implements CommentRepository {
         BooleanBuilder builder = new BooleanBuilder();
         builder.and(eqActiveStatus(activeStatus));
         builder.and(likeContent(content));
-        return null;
+        return builder;
     }
 
     private BooleanExpression likeContent(String content) {
