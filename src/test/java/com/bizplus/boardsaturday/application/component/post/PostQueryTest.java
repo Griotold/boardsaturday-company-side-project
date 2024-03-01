@@ -12,11 +12,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
+@Transactional
 @ActiveProfiles("test")
 class PostQueryTest {
 
@@ -28,8 +31,15 @@ class PostQueryTest {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    EntityManager em;
     @BeforeEach
     void dataSet() {
+        em.createNativeQuery("ALTER TABLE category ALTER COLUMN category_id RESTART WITH 1").executeUpdate();
+        em.createNativeQuery("ALTER TABLE post ALTER COLUMN post_id RESTART WITH 1").executeUpdate();
+        em.createNativeQuery("ALTER TABLE post_tag ALTER COLUMN post_tag_id RESTART WITH 1").executeUpdate();
+        em.createNativeQuery("ALTER TABLE tag ALTER COLUMN tag_id RESTART WITH 1").executeUpdate();
         Category category = new Category("category", "description", 1, ActiveStatus.ACTIVE);
         categoryRepository.create(category);
 
