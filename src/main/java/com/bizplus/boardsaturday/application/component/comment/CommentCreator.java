@@ -28,7 +28,12 @@ public class CommentCreator {
         Post post = postRepository.findById(request.getPostId())
                 .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
 
-        Comment comment = request.toEntity(member, post);
+        Comment parent = null;
+        if (request.isReply()) {
+            parent = commentRepository.findById(request.getParentId())
+                    .orElseThrow(() -> new EntityNotFoundException("부모 댓글을 찾을 수 없습니다."));
+        }
+        Comment comment = request.toEntity(member, post, parent);
 
         return commentRepository.create(comment);
     }
