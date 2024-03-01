@@ -16,27 +16,20 @@ import javax.persistence.*;
 @DynamicUpdate
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment extends BaseTimeEntity {
+public class Member extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_id")
+    @Column(name = "member_id")
     private Long id;
 
-    private String content;
+    private String name;
+
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private ActiveStatus activeStatus;
 
     @Enumerated(EnumType.STRING)
     private DeleteStatus deleteStatus;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private Post post;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
-
 }
