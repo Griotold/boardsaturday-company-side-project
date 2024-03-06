@@ -1,16 +1,11 @@
 package com.bizplus.boardsaturday.infrastucture.persistence;
 
-import com.bizplus.boardsaturday.domain.common.BaseEntity;
-import com.bizplus.boardsaturday.domain.dto.PostWithCategoryDto;
-import com.bizplus.boardsaturday.domain.dto.QPostWithCategoryDto;
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.entity.Post;
 import com.bizplus.boardsaturday.domain.repository.PostRepository;
 import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import com.bizplus.boardsaturday.infrastucture.persistence.jpa.JpaPostRepository;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.ConstructorExpression;
-import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -19,13 +14,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-import static com.bizplus.boardsaturday.domain.entity.QPost.post;
 import static com.bizplus.boardsaturday.domain.entity.QCategory.category;
+import static com.bizplus.boardsaturday.domain.entity.QPost.post;
 import static com.bizplus.boardsaturday.domain.entity.QPostTag.postTag;
 import static com.bizplus.boardsaturday.domain.entity.QTag.tag;
 
@@ -34,6 +28,7 @@ import static com.bizplus.boardsaturday.domain.entity.QTag.tag;
 public class PostRepositoryImpl implements PostRepository {
     private final JpaPostRepository jpaPostRepository;
     private final JPAQueryFactory query;
+
     @Override
     public Post create(Post post) {
         return jpaPostRepository.save(post);
@@ -42,14 +37,6 @@ public class PostRepositoryImpl implements PostRepository {
     @Override
     public List<Post> findAll() {
         return jpaPostRepository.findAll();
-    }
-
-    @Override
-    public List<PostWithCategoryDto> findAllOrderByCreatedAt() {
-        return query.select(selectPostWithCategory())
-                .from(post)
-                .innerJoin(post.category, category)
-                .fetch();
     }
 
     @Override
@@ -77,15 +64,6 @@ public class PostRepositoryImpl implements PostRepository {
                 .where(post.id.eq(id))
                 .fetch();
         return Optional.of(result.get(0));
-    }
-
-    @Override
-    public List<Post> findAllWithCategoryAndTags() {
-        return query.select(post)
-                .from(post)
-                .innerJoin(post.category).fetchJoin()
-                .orderBy(post.createdAt.desc())
-                .fetch();
     }
 
     @Override
@@ -155,18 +133,4 @@ public class PostRepositoryImpl implements PostRepository {
         return post.body.likeIgnoreCase("%" + condition + "%");
     }
 
-
-
-    private ConstructorExpression<PostWithCategoryDto> selectPostWithCategory() {
-        return new QPostWithCategoryDto(
-                post.id,
-                post.title,
-                post.body,
-                post.activeStatus,
-                post.deleteStatus,
-                post.createdAt,
-                post.updatedAt,
-                category.name
-        );
-    }
 }
