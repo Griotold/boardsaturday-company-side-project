@@ -7,16 +7,12 @@ import com.bizplus.boardsaturday.domain.type.DeleteStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DynamicInsert
-@DynamicUpdate
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends BaseTimeEntity {
@@ -46,7 +42,7 @@ public class Post extends BaseTimeEntity {
     private DeleteStatus deleteStatus;
 
     @OneToMany(mappedBy = "post")
-    private List<PostTag> postTags = new ArrayList<>();
+    private final List<PostTag> postTags = new ArrayList<>();
 
     public Post(String title, String body, Category category, ActiveStatus activeStatus, DeleteStatus deleteStatus) {
         this.title = title;
