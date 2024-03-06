@@ -1,6 +1,5 @@
 package com.bizplus.boardsaturday.domain.repository;
 
-import com.bizplus.boardsaturday.domain.dto.PostWithCategoryDto;
 import com.bizplus.boardsaturday.domain.entity.Category;
 import com.bizplus.boardsaturday.domain.entity.Post;
 import com.bizplus.boardsaturday.domain.type.ActiveStatus;
@@ -15,8 +14,6 @@ public interface PostRepository {
     Post create(Post post);
 
     List<Post> findAll();
-
-    List<PostWithCategoryDto> findAllOrderByCreatedAt();
 
     Optional<Post> findById(Long id);
 
