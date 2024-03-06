@@ -67,15 +67,6 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public List<Post> findAllWithCategoryAndTags() {
-        return query.select(post)
-                .from(post)
-                .innerJoin(post.category).fetchJoin()
-                .orderBy(post.createdAt.desc())
-                .fetch();
-    }
-
-    @Override
     public List<Post> searchBy(Category category, ActiveStatus activeStatus, String title, String body) {
         BooleanBuilder booleanBuilder = toBooleanBuilder(category, activeStatus, title, body);
 

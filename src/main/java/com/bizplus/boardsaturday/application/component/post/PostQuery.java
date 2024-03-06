@@ -13,8 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -23,13 +21,6 @@ public class PostQuery {
 
     private final PostRepository postRepository;
     private final CategoryRepository categoryRepository;
-
-    public List<PostResponse> findAll() {
-        List<Post> all = postRepository.findAllWithCategoryAndTags();
-        List<PostResponse> collect = all.stream()
-                .map(PostResponse::new).collect(Collectors.toList());
-        return collect;
-    }
 
     public Page<PostResponse> searchWithPage(Long categoryId,
                                              ActiveStatus activeStatus,

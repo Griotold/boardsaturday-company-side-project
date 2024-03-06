@@ -13,8 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -22,8 +20,6 @@ public class PostService {
     private final PostCreator postCreator;
     private final PostUpdater postUpdater;
     private final PostDeleter postDeleter;
-
-    public List<PostResponse> findAll() {return postQuery.findAll();}
 
     public Page<PostResponse> searchWithPage(Long categoryId, ActiveStatus activeStatus,
                                              String title, String body,

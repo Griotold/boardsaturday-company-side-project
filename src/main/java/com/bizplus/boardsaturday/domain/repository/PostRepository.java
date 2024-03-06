@@ -21,8 +21,6 @@ public interface PostRepository {
 
     Optional<Post> findByIdWithCategory(Long id);
 
-    List<Post> findAllWithCategoryAndTags();
-
     List<Post> searchBy(Category category, ActiveStatus activeStatus, String title, String body);
 
     Page<Post> searchByPage(Category category, ActiveStatus activeStatus, String title, String body, Pageable pageable);
