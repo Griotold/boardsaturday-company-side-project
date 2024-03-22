@@ -5,6 +5,7 @@ import com.bizplus.boardsaturday.domain.common.BaseTimeEntity;
 import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import com.bizplus.boardsaturday.domain.type.DeleteStatus;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Post extends BaseTimeEntity {
 
     @Id

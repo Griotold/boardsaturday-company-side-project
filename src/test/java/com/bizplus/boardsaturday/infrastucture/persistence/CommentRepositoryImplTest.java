@@ -44,7 +44,7 @@ class CommentRepositoryImplTest {
     }
     
     @Test
-    void CommentRepositoryImpl_create() throws Exception {
+    void CommentRepositoryImpl_create() {
         // given == Arrange
         String content = "Muad'Dib";
         Post post = new Post("title", "body", null, ActiveStatus.ACTIVE, DeleteStatus.EXISTING);
