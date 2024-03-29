@@ -58,5 +58,4 @@ class CommentRepositoryImplTest {
         assertThat(savedComment).isNotNull();
         assertThat(savedComment.getId()).isGreaterThan(0L);
     }
-
 }
