@@ -1,9 +1,12 @@
 package com.bizplus.boardsaturday.global.config;
 
+import com.bizplus.boardsaturday.global.config.jwt.JWTAuthenticationFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -30,6 +33,8 @@ public class SecurityConfig {
         http.formLogin().disable(); // form login X
         http.httpBasic().disable(); // httpBasic : 브라우저가 팝업창으로 인증을 진행 -> 이거 허용 X
 
+        http.apply(new CustomSecurityFilterManager());
+
         // 일단 모든 url 요청 인증 안하겠다
         http.authorizeRequests()
                 .anyRequest().permitAll();
@@ -37,7 +42,14 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // todo JWT 필터등록 필요함!
+    public class CustomSecurityFilterManager extends AbstractHttpConfigurer<CustomSecurityFilterManager, HttpSecurity> {
+        @Override
+        public void configure(HttpSecurity builder) throws Exception {
+            AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
+            builder.addFilter(new JWTAuthenticationFilter(authenticationManager));
+            super.configure(builder);
+        }
+    }
 
     public CorsConfigurationSource configurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
