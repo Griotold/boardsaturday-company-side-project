@@ -43,13 +43,14 @@ public class Member extends BaseTimeEntity {
 
     public Member(String name,
                   String email,
+                  String password,
                   ActiveStatus activeStatus,
                   DeleteStatus deleteStatus) {
         this.name = name;
         this.email = email;
+        this.password = password;
         this.activeStatus = activeStatus;
         this.deleteStatus = deleteStatus;
         this.role = UserEnum.ADMIN;
-        this.password = "1234";
     }
 }

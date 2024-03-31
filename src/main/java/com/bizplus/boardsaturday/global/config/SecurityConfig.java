@@ -16,7 +16,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        log.info("info : BCryptPasswordEncoder 빈 등록됨");
         return new BCryptPasswordEncoder();
     }
 
