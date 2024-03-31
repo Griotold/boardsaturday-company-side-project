@@ -53,4 +53,9 @@ public class Member extends BaseTimeEntity {
         this.deleteStatus = deleteStatus;
         this.role = UserEnum.ADMIN;
     }
+
+    public Member(Long id, String role) {
+        this.id = id;
+        this.role = UserEnum.valueOf(role);
+    }
 }
