@@ -81,16 +81,16 @@ class CategoryRepositoryImplTest {
     @Test
     @DisplayName("게시글 갯수를 포함한 카테고리 리스트")
     void findAllWithPostCount() throws Exception {
-        // given
-        // when
-        List<CategoryWithPostCountDto> dto = categoryRepository.findAllWithPostCount();
-        for (CategoryWithPostCountDto el : dto) {
-            log.info("categoryId = {}", el.getCategoryId());
-            log.info("categoryName = {}", el.getName());
-            log.info("postCount = {}", el.getPostCount());
-        }
+        // given - setting data or request
 
-        // then
+        // when - action
+        List<CategoryWithPostCountDto> dto = categoryRepository.findAllWithPostCount();
+
+        // then - result
+        dto.forEach(category -> {
+            assertThat(category).isNotNull();
+            assertThat(category.getName()).isEqualTo("category" + category.getCategoryId());
+        });
     }
 
 }

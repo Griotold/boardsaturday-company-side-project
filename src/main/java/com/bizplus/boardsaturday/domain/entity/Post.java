@@ -5,20 +5,18 @@ import com.bizplus.boardsaturday.domain.common.BaseTimeEntity;
 import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import com.bizplus.boardsaturday.domain.type.DeleteStatus;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DynamicInsert
-@DynamicUpdate
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Post extends BaseTimeEntity {
 
     @Id
@@ -46,7 +44,7 @@ public class Post extends BaseTimeEntity {
     private DeleteStatus deleteStatus;
 
     @OneToMany(mappedBy = "post")
-    private List<PostTag> postTags = new ArrayList<>();
+    private final List<PostTag> postTags = new ArrayList<>();
 
     public Post(String title, String body, Category category, ActiveStatus activeStatus, DeleteStatus deleteStatus) {
         this.title = title;

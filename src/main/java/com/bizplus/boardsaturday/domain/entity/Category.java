@@ -4,14 +4,10 @@ import com.bizplus.boardsaturday.application.request.category.UpdateCategoryRequ
 import com.bizplus.boardsaturday.domain.common.BaseTimeEntity;
 import com.bizplus.boardsaturday.domain.type.ActiveStatus;
 import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Entity
-@DynamicInsert
-@DynamicUpdate
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
