@@ -50,5 +50,6 @@ public class Member extends BaseTimeEntity {
         this.activeStatus = activeStatus;
         this.deleteStatus = deleteStatus;
         this.role = UserEnum.ADMIN;
+        this.password = "1234";
     }
 }
