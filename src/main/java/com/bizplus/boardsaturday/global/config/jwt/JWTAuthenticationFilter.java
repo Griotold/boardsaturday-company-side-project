@@ -58,4 +58,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         LoginResponse loginResponse = new LoginResponse(loginMember.getMember());
         ResponseUtil.success(response, loginResponse);
     }
+
+    // attemptAuthentication 이 실패하면 실행되는 메소드
+    // catch 블록을 타면 아래 메서드가 실행된다.
+    // 얘가 호출되면 로그인이 실패
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        log.info("info : unsuccessfulAuthentication 호출됨");
+        ResponseUtil.fail(response);
+    }
 }

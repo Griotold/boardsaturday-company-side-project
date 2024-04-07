@@ -21,4 +21,17 @@ public class ResponseUtil {
             log.error("에러");
         }
     }
+
+    public static void fail(HttpServletResponse response) {
+        try {
+            ObjectMapper om = new ObjectMapper();
+            ResponseDto<?> responseDto = new ResponseDto<>(ResponseStatus.BAD.getCode(), ResponseStatus.BAD.getMessage(), "로그인 실패");
+            String responseBody = om.writeValueAsString(responseDto);
+            response.setContentType("application/json; charset=utf-8");
+            response.setStatus(401);
+            response.getWriter().println(responseBody);
+        } catch (Exception e) {
+            log.error("에러");
+        }
+    }
 }
