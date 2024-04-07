@@ -1,0 +1,33 @@
+package com.bizplus.boardsaturday.application.service;
+
+import com.bizplus.boardsaturday.application.response.login.LoginJWTResponse;
+import com.bizplus.boardsaturday.global.config.auth.LoginMember;
+import com.bizplus.boardsaturday.global.config.jwt.JWTProcess;
+import com.bizplus.boardsaturday.global.config.jwt.LoginRequest;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class LoginProcessingService {
+    private final AuthenticationManager authenticationManager;
+
+    public LoginJWTResponse login(LoginRequest loginRequest) {
+        log.info("info : LoginProcessingService.login 호출됨");
+        Authentication authenticationToken
+                = new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+
+        log.info("info : LoginProcessingSerivce.successfulAuthentication 의 로직 시작");
+        LoginMember loginMember = (LoginMember) authentication.getPrincipal();
+        String jwtToken = JWTProcess.create(loginMember);
+//        response.addHeader(JWTConstants.HEADER, jwtToken);
+
+        return new LoginJWTResponse(loginMember.getMember(), jwtToken);
+    }
+}
