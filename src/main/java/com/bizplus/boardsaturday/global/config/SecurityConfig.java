@@ -1,6 +1,7 @@
 package com.bizplus.boardsaturday.global.config;
 
 import com.bizplus.boardsaturday.global.config.jwt.JWTAuthenticationFilter;
+import com.bizplus.boardsaturday.global.config.jwt.JWTAuthorizationFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +36,9 @@ public class SecurityConfig {
 
         http.apply(new CustomSecurityFilterManager());
 
+        // todo 인증 실패시 -> http.exceptionHandling().authenticationEntryPoint((request, response, authException))
+
+        // todo 권한 실패시 -> http.exceptionHandling().accessDeniedHandler(request, response, e)
         // 일단 모든 url 요청 인증 안하겠다
         http.authorizeRequests()
                 .anyRequest().permitAll();
@@ -42,11 +46,14 @@ public class SecurityConfig {
         return http.build();
     }
 
-    public class CustomSecurityFilterManager extends AbstractHttpConfigurer<CustomSecurityFilterManager, HttpSecurity> {
+    private class CustomSecurityFilterManager extends AbstractHttpConfigurer<CustomSecurityFilterManager, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
             builder.addFilter(new JWTAuthenticationFilter(authenticationManager));
+
+            // JWTAuthorizationFilter 등록!
+            builder.addFilter(new JWTAuthorizationFilter(authenticationManager));
             super.configure(builder);
         }
     }
