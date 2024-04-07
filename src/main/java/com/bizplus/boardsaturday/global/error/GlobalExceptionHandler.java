@@ -2,6 +2,7 @@ package com.bizplus.boardsaturday.global.error;
 
 import com.bizplus.boardsaturday.global.error.ex.BusinessException;
 import com.bizplus.boardsaturday.global.error.ex.CustomValidationException;
+import com.bizplus.boardsaturday.global.error.ex.LoginFailException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,6 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Map;
@@ -28,6 +28,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(errorResponse);
     }
+
     /**
      * 타입 미스매치
      */
@@ -35,7 +36,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse<?>> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         log.error("handleMethodArgumentTypeMismatchException", e);
         ErrorResponse<Object> errorResponse
-                = new ErrorResponse<> (ErrorCode.TYPE_MISMATCH.getErrorCode(), ErrorCode.TYPE_MISMATCH.getMessage(), null);
+                = new ErrorResponse<>(ErrorCode.TYPE_MISMATCH.getErrorCode(), ErrorCode.TYPE_MISMATCH.getMessage(), null);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
@@ -43,7 +44,7 @@ public class GlobalExceptionHandler {
      * 지원하지 않은 HTTP method 호출 할 경우 발생
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    protected ResponseEntity<ErrorResponse<?>>  handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+    protected ResponseEntity<ErrorResponse<?>> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         log.error("handleHttpRequestMethodNotSupportedException", e);
         ErrorResponse<Object> errorResponse
                 = new ErrorResponse<>(ErrorCode.NOT_SUPPORTED_METHOD.getErrorCode(), ErrorCode.NOT_SUPPORTED_METHOD.getMessage(), null);
@@ -53,7 +54,7 @@ public class GlobalExceptionHandler {
     /**
      * 비즈니스 로직 실행 중 오류 발생
      */
-    @ExceptionHandler(value = { BusinessException.class })
+    @ExceptionHandler(value = {BusinessException.class})
     protected ResponseEntity<ErrorResponse<?>> handleConflict(BusinessException e) {
         log.error("BusinessException", e);
         ErrorResponse<Object> errorResponse = new ErrorResponse<>(e.getErrorCode().getErrorCode(), e.getMessage(), null);
@@ -70,6 +71,18 @@ public class GlobalExceptionHandler {
         ErrorResponse<EntityNotFoundException> errorResponse
                 = new ErrorResponse<>(ErrorCode.ENTITY_NOT_FOUND.getErrorCode(), e.getMessage(), null);
         return ResponseEntity.status(ErrorCode.ENTITY_NOT_FOUND.getHttpStatus())
+                .body(errorResponse);
+    }
+
+    /**
+     * LoginFailException
+     */
+    @ExceptionHandler(LoginFailException.class)
+    protected ResponseEntity<ErrorResponse<?>> handleLoginFailException(LoginFailException e) {
+        log.error("handleLoginFailException", e);
+        ErrorResponse<EntityNotFoundException> errorResponse
+                = new ErrorResponse<>(ErrorCode.BAD_CREDENTIAL.getErrorCode(), ErrorCode.BAD_CREDENTIAL.getMessage(), null);
+        return ResponseEntity.status(ErrorCode.BAD_CREDENTIAL.getHttpStatus())
                 .body(errorResponse);
     }
 

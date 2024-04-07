@@ -12,7 +12,8 @@ public enum ErrorCode {
     ENTITY_NOT_FOUND(HttpStatus.BAD_REQUEST, "B-003", "엔티티를 찾을 수 없습니다."),
     CONFLICT(HttpStatus.CONFLICT, "B-004", "시스템과 충돌이 발생하여 처리할 수 없는 요청입니다."),
     DUPLICATED_EMAIL(HttpStatus.BAD_REQUEST, "B-005", "중복된 이메일 입니다."),
-    PASSWORD_NOT_CONFIRMED(HttpStatus.BAD_REQUEST, "B-006", "비밀번호와 비밀번호 확인이 다릅니다.");
+    PASSWORD_NOT_CONFIRMED(HttpStatus.BAD_REQUEST, "B-006", "비밀번호와 비밀번호 확인이 다릅니다."),
+    BAD_CREDENTIAL(HttpStatus.BAD_REQUEST, "B-007", "아이디와 비밀번호를 확인해주세요.");
 
 
     ErrorCode(HttpStatus httpStatus, String errorCode, String message) {
