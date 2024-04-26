@@ -20,7 +20,13 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Slf4j
 @Configuration
 public class SecurityConfig {
+    // 장프로님 세팅! - AuthenticationManager
+    //    @Bean
+//    public AuthenticationManager authenticationManager2(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+//        return authenticationConfiguration.getAuthenticationManager();
+//    }
 
+    // @Bean 은 private 만 안된다.
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http,
                                                        BCryptPasswordEncoder bCryptPasswordEncoder,
@@ -40,7 +46,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.headers().frameOptions().disable(); // iframe 허용X
-        http.csrf().disable(); // enable 이면 postman 작동 안함.
+        http.csrf().disable(); // enable 이면 postman 작동 안함. -> 꼭 꺼줘야 url로 넘어감
         http.cors().configurationSource(configurationSource()); // 다른 서버에 자바스크립트 요청 허용
 
         // jSessionId 를 백엔드에서 관리하지 안겠다.
@@ -54,8 +60,12 @@ public class SecurityConfig {
 
         // todo 권한 실패시 -> http.exceptionHandling().accessDeniedHandler(request, response, e)
         // 일단 모든 url 요청 인증 안하겠다
+        // todo -> antMatchers("/api/login).permitAll()
         http.authorizeRequests()
-                .anyRequest().permitAll();
+                .antMatchers("/login").permitAll()
+                .antMatchers("/api/login").permitAll()
+                .antMatchers("/api/admin/login").permitAll()
+                .anyRequest().authenticated();
 
         return http.build();
     }

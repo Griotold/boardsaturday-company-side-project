@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
+// CustomUserDetails -> 구현체 이름
 @Getter
 @RequiredArgsConstructor
 public class LoginMember implements UserDetails {

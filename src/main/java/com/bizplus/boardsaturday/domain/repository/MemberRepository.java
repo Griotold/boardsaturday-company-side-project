@@ -10,4 +10,6 @@ public interface MemberRepository {
     Optional<Member> findById(Long id);
 
     Optional<Member> findByEmail(String email);
+
+    // todo findByEmail에서 delete_status가 existing인 것만 가져와야 함
 }

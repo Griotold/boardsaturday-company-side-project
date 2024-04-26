@@ -12,26 +12,20 @@ import com.bizplus.boardsaturday.domain.repository.CommentRepository;
 import com.bizplus.boardsaturday.domain.repository.MemberRepository;
 import com.bizplus.boardsaturday.domain.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
@@ -70,6 +64,7 @@ public class CommentCreatorMockTest {
         // then
         assertThat(savedComment).isEqualTo(comment); // 또는 필요한 필드를 검증
     }
+
     @DisplayName("대댓글이 아니면 commentRepository.findById() 호출 X")
     @Test
     void CommentCreatorMockTest_create_notReply() {
@@ -93,6 +88,7 @@ public class CommentCreatorMockTest {
         verify(commentRepository, times(0)).findById(any());
         verify(commentRepository, times(1)).create(any());
     }
+
     @DisplayName("대댓글인 경우, commentRepository.findById() 호출!")
     @Test
     void CommentCreatorMockTest_create_reply() {
@@ -102,8 +98,8 @@ public class CommentCreatorMockTest {
         Comment comment = CommentFixture.createCommentWithParent(member, post);
         CreateCommentRequest createCommentRequest
                 = CreateCommentRequestFixture.create(member.getId(),
-                                                    post.getId(),
-                                                    comment.getParent().getId());
+                post.getId(),
+                comment.getParent().getId());
 
         when(memberRepository.findById(any())).thenReturn(Optional.of(member));
         when(postRepository.findById(any())).thenReturn(Optional.of(post));
@@ -121,6 +117,7 @@ public class CommentCreatorMockTest {
         verify(commentRepository, times(1)).create(any());
 
     }
+
     @DisplayName("ArgumentCaptor - 인자값 캡쳐")
     @Test
     void CommentCreatorMockTest_create_argumentCaptor() {
